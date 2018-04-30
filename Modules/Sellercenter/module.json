@@ -1,0 +1,16 @@
+{
+    "name": "Sellercenter",
+    "alias": "sellercenter",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Sellercenter\\Providers\\SellercenterServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
