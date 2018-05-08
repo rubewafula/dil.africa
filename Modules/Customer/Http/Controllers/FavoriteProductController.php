@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class CustomerController extends Controller
+class FavoriteProductController extends Controller
 {
     /**
      * Display a listing of the resource.
