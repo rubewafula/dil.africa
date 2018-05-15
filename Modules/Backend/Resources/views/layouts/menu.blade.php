@@ -1,25 +1,35 @@
-<div class="subnavbar">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-facetime-video"></i><span>App Tour</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="icons.html">Icons</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="pricing.html">Pricing Plans</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-            <li><a href="error.html">404</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
+   <div class="page-sidebar sidebar horizontal-bar">
+                <div class="page-sidebar-inner">
+                    <ul class="menu accordion-menu">
+                        <li class="nav-heading"><span>Navigation</span></li>
+                        <li class="active"><a href="{{url('backend')}}"><span class="menu-icon icon-speedometer"></span><p>Dashboard</p></a></li>
+                        <li><a href="{{url('backend/orders')}}"><span class="menu-icon icon-user"></span><p>Orders</p></a></li>
+                        <li class="droplink"><a href="#"><span class="menu-icon icon-envelope-open"></span><p>Administration</p><span class="arrow"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="inbox.html">Seller  management</a></li>
+                                <li><a href="message-view.html">product  Reviews</a></li>
+                                <li><a href="compose.html">Agents  management</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-heading"><span>Inquiries </span></li>
+                        <li class="droplink"><a href="#"><span class="menu-icon icon-briefcase"></span><p>Set up </p><span class="arrow"></span></a>
+                            <ul class="sub-menu">
+                                <li><a href="{{url('backend/brands')}}">Brands</a></li>
+                                <li><a href="{{url('backend/categories')}}">Categories</a></li>
+                                <li><a href="{{url('backend/sub_categories')}}">Sub Categories</a></li>
+                                <li><a href="{{url('backend/countries')}}">Countries</a></li>
+                                <li><a href="{{url('backend/locations')}}">Locations Management</a></li>
+                                <li><a href="{{url('backend/warehouses')}}"> Warehouse  management</a></li>
+                                <li><a href="{{url('backend/roles')}}">Roles  Administration</a></li>
+                                
+                            </ul>
+                        </li>
+
+ <li><a href="{{url('backend/orders')}}"><span class="menu-icon icon-user"></span><p>Users  Management</p></a></li>
+
+  <li><a href="{{url('backend/logistics')}}"><span class="menu-icon icon-user"></span><p>Logistics Management</p></a></li>
+                   
+                       
+                    </ul>
+                </div><!-- Page Sidebar Inner -->
+            </div><!-- Page Sidebar -->

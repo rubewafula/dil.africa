@@ -164,6 +164,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Watson\Breadcrumbs\ServiceProvider::class,
+
 
 
         /*
@@ -179,6 +181,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        nilsenj\Toastr\ToastrServiceProvider::class
+
 
 
     ],
@@ -232,6 +236,9 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
+        'Breadcrumbs' => Watson\Breadcrumbs\Facade::class,
+        'Toastr' => nilsenj\Toastr\Facades\Toastr::class
+
 
 
     ],

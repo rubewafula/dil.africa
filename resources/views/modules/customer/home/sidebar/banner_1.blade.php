@@ -1,0 +1,1 @@
+<img src="assets/images/banners/baby-boom-banner.png" alt="Image">

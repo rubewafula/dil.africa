@@ -5,6 +5,7 @@ namespace Modules\Backend\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use  App\City;
 
 class BackendController extends Controller
 {
@@ -14,7 +15,7 @@ class BackendController extends Controller
      */
     public function index()
     {
-        return view('backend::index');
+        return view('backend::dashboard');
     }
 
     /**
@@ -68,5 +69,17 @@ class BackendController extends Controller
      */
     public function destroy()
     {
+    }
+
+    public  function  load_cities(Request  $request)
+    {
+
+          
+        $cities= City::select('id','name')->where('country_id',$request->country_id)->get();
+
+         return  $cities;
+
+
+
     }
 }

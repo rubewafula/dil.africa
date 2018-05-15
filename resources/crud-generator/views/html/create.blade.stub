@@ -1,18 +1,25 @@
-@extends('layouts.app')
+@extends('backend::layouts.master')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            @include('admin.sidebar')
+                <div class="page-breadcrumb" >
+                    {{ Breadcrumbs::render() }}
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Create New %%modelName%%</div>
-                    <div class="card-body">
-                        <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <br />
-                        <br />
+                </div>
+                <div class="page-title">
+                    <div class="container">
+                        <h3>  New %%modelName%% </h3>
+                    </div>
+                </div>
+                <div id="main-wrapper" class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                </div>
+                                 <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                                <div class="panel-body">
 
+                                                            
                         @if ($errors->any())
                             <ul class="alert alert-danger">
                                 @foreach ($errors->all() as $error)
@@ -27,10 +34,20 @@
                             @include ('%%viewTemplateDir%%.form')
 
                         </form>
-
+                                  
+                                </div>
+                            </div>
+                           
+                           
+                           
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+                <div class="page-footer">
+                    <div class="container">
+                        <p class="no-s"><?php echo date('Y') ?>&copy; </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-@endsection
+       
+
+ @endsection
