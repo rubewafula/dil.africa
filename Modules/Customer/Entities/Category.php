@@ -17,4 +17,5 @@ class Category extends Model
     public function getAllCategories(){
         return $this->get();
     }
+    
 }
