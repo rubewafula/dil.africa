@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DailyDeals extends Migration
+class CreatePromotionSections extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class DailyDeals extends Migration
      */
     public function up()
     {
-        Schema::create('daily_deals', function (Blueprint $table) {
+        Schema::create('promotion_sections', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id', 20);
-            $table->date('deal_date');
+            $table->string('name', 100);  
+            $table->integer('no_of_images')->length('20');
             $table->timestamps();
-            
-            $table->foreign('product_id')->references('id')
-                    ->on('products')->onDelete('RESTRICT')
-                    ->onUpdate('CASCADE');
         });
     }
 
@@ -32,6 +28,6 @@ class DailyDeals extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daily_deals');
+        Schema::dropIfExists('promotion_sections');
     }
 }
