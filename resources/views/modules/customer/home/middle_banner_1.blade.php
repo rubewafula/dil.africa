@@ -1,9 +1,12 @@
 <div class="row">
 
+    @php($banner = new \Modules\Customer\Entities\Promotion_banner())
+    @php($middle_banner = $banner->getMiddleBanner_1())
+    
     <div class="col-md-12">
         <div class="wide-banner cnt-strip">
             <div class="image">
-                <img class="img-responsive" src="assets/images/banners/casual-clothing-sale.png" alt="">
+                <img class="img-responsive" src="assets/images/banners/{{$middle_banner->url}}" alt="">
             </div>	
             <div class="strip strip-text">
                 <div class="strip-inner">

@@ -63,7 +63,7 @@
                 <!-- ============================================== SCROLL TABS ============================================== -->
                 <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
 
-                    @include('customer::home.recommended')
+                    @include('customer::home.recommended.index')
                 </div><!-- /.scroll-tabs -->
                 <!-- ============================================== SCROLL TABS : END ============================================== -->
                 <!-- ============================================== WIDE PRODUCTS ============================================== -->

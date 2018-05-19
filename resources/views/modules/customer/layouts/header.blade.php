@@ -27,9 +27,9 @@
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo">
-                        <a href="home.html">
+                        <a href="{{url('/')}}">
 
-                            <img src="assets/images/logo.png" alt="">
+                            <img src="{{url('assets/images/logo.png')}}" alt="">
 
                         </a>
                     </div><!-- /.logo -->
@@ -93,12 +93,12 @@
                                     <div class="row">
                                         <div class="col-xs-4">
                                             <div class="image">
-                                                <a href="detail.html"><img src="assets/images/cart.jpg" alt=""></a>
+                                                <a href="#"><img src="{{url('assets/images/cart.jpg')}}" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="col-xs-7">
 
-                                            <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
+                                            <h3 class="name"><a href="{{url('index.php?page-detail')}}">Simple Product</a></h3>
                                             <div class="price"> Ksh 3,800</div>
                                         </div>
                                         <div class="col-xs-1 action">
@@ -149,7 +149,7 @@
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-                                    <a href="home.html">Home</a>
+                                    <a href="{{url('/')}}">Home</a>
                                 </li>
                                 @php( $categories = \Modules\Customer\Entities\Category::where('status', 1)->limit(7)->get() )
                                 
@@ -204,8 +204,7 @@
                                                     <div class="col-xs-12 col-menu">
                                                         <ul class="links">
                                                             <li><a href="home.html">Home</a></li>
-                                                            <li><a href="category.html">Product Category</a></li>
-                                                            <li><a href="detail.html">Product Details</a></li>									
+                                                            <li><a href="category.html">Product Category</a></li>								
                                                             <li><a href="checkout.html">Checkout</a></li>
                                                             <li><a href="contact.html">Contact</a></li>
                                                             <li><a href="sign-in.html">Sign In</a></li>

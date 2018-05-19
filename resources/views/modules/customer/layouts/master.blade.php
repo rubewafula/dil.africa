@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="{{url('assets/css/animate.min.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/rateit.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/bootstrap-select.min.css')}}">
+        <link href="{{url('assets/css/lightbox.css')}}" rel="stylesheet">
 
         <!-- Icons/Glyphs -->
         <link rel="stylesheet" href="{{url('assets/css/font-awesome.css')}}">

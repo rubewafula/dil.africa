@@ -1,8 +1,8 @@
 <div class='col-md-3 sidebar'>
     <div class="sidebar-module-container">
-        <div class="home-banner outer-top-n"> <a href="#"><img src="assets/images/cash-on-delivery.png" alt="cash-on-delivery"></a>
-            <a href="#"><img src="assets/images/genuine-products.png" alt="genuine-products"></a>
-            <a href="#"><img src="assets/images/FAQs.png" alt="FAQS"></a>
+        <div class="home-banner outer-top-n"> <a href="#"><img src="{{url('assets/images/cash-on-delivery.png')}}" alt="cash-on-delivery"></a>
+            <a href="#"><img src="{{url('assets/images/genuine-products.png')}}" alt="genuine-products"></a>
+            <a href="#"><img src="{{url('assets/images/FAQs.png')}}" alt="FAQS"></a>
         </div>		
 
         <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">

@@ -1,13 +1,9 @@
+@php($product_tags = \Modules\Customer\Entities\Product_tag::get())
 <div class="sidebar-widget-body outer-top-xs">
-    <div class="tag-list">					
-        <a class="item" title="Phone" href="category.html">Phone</a>
-        <a class="item active" title="Vest" href="category.html">Vest</a>
-        <a class="item" title="Smartphone" href="category.html">Smartphone</a>
-        <a class="item" title="Furniture" href="category.html">Furniture</a>
-        <a class="item" title="T-shirt" href="category.html">T-shirt</a>
-        <a class="item" title="Sweatpants" href="category.html">Sweatpants</a>
-        <a class="item" title="Sneaker" href="category.html">Sneaker</a>
-        <a class="item" title="Toys" href="category.html">Toys</a>
-        <a class="item" title="Rose" href="category.html">Rose</a>
+    <div class="tag-list">
+        @foreach($product_tags as $product_tag)
+        @php($tagname = \Modules\Customer\Entities\Tag::find($product_tag->tag_id)->name)
+        <a class="item" title="{{$tagname}}" href="products/tag/{{$product_tag->tag_id}}">{{$tagname}}</a>
+        @endforeach
     </div><!-- /.tag-list -->
 </div><!-- /.sidebar-widget-body -->
