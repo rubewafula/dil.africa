@@ -25,8 +25,9 @@ class Product_price extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_id', 'minimum_quantity', 'standard_price', 
-        'offer_price', 'start_date', 'end_date', 'status'];
+    protected $fillable = ['product_id', 'color', 'size', 'quantity', 'is_default',
+        'minimum_quantity', 'standard_price', 'offer_price', 'start_date',
+        'end_date', 'status'];
 
     
     public function product()

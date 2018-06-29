@@ -4,13 +4,18 @@
     @php($products = $featured_products->getFeaturedProducts())
 
     @foreach($products as $product)
+    @if($product->product == null)
+    @continue
+    @endif
     <div class="item item-carousel">
         <div class="products">
 
             <div class="product">		
                 <div class="product-image">
                     <div class="image">
-                        <a href="{{url('shop/product/detail/'.$product->id)}}"><img  src="assets/images/products/{{$product->product->getDefaultImage()->image_url}}" alt=""></a>
+                        <a href="{{url('shop/product/detail/'.$product->product_id)}}">
+                            <img  src="assets/images/products/{{$product->product->getDefaultImage()->image_url}}" alt="">
+                        </a>
                     </div><!-- /.image -->			
 
                     <div class="tag hot"><span>hot</span></div>		   
@@ -18,16 +23,16 @@
 
 
                 <div class="product-info text-left">
-                    <h3 class="name"><a href="{{url('shop/product/detail/'.$product->id)}}">{{$product->product->name}}</a></h3>
+                    <h3 class="name"><a href="{{url('shop/product/detail/'.$product->product_id)}}">{{$product->product->name}}</a></h3>
                     <div class="rating rateit-small"></div>
                     <div class="description"></div>
-
+                    @php($productPrice = $product->product->getActivePrice())
                     <div class="product-price">	
                         <span class="price">
-                            Ksh {{$product->product->getActivePrice()->offer_price}}				
+                            Ksh {{$productPrice->offer_price}}				
                         </span>
-                        <span class="price-before-discount">KSh {{$product->product->getActivePrice()->standard_price}}</span>
-
+                        <span class="price-before-discount">KSh {{$productPrice->standard_price}}</span>
+                        <input type="hidden" value="{{$product->id}}" id="product_featured_ref" />
                     </div><!-- /.product-price -->
 
                 </div><!-- /.product-info -->
@@ -35,22 +40,19 @@
                     <div class="action">
                         <ul class="list-unstyled">
                             <li class="add-cart-button btn-group">
-                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                    <i class="fa fa-shopping-cart"></i>													
-                                </button>
-                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-
+                                <form method="POST" action="{{url('shop/add_to_cart')}}">
+                                    <input type="hidden" value="{{$productPrice->id}}" name="product_ref" />
+                                    <input type="hidden" value="1" name="quantity" />
+                                    <button data-toggle="tooltip" class="btn btn-primary icon addtocart" type="submit" product_ref="{{$productPrice->id}}" title="Add Cart">
+                                        <i class="fa fa-shopping-cart"></i>													
+                                    </button>
+                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                </form>
                             </li>
 
                             <li class="lnk wishlist">
-                                <a class="add-to-cart" href="{{url('shop/product/detail/'.$product->id)}}" title="Wishlist">
+                                <a class="add-to-cart" href="{{url('shop/add_to_wishlist/'.$productPrice->product->id.'/'.$productPrice->id)}}" title="Wishlist">
                                     <i class="icon fa fa-heart"></i>
-                                </a>
-                            </li>
-
-                            <li class="lnk">
-                                <a class="add-to-cart" href="{{url('shop/product/detail/'.$product->id)}}" title="Compare">
-                                    <i class="fa fa-signal" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>

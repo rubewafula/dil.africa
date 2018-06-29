@@ -29,7 +29,7 @@ class Sub_category extends Model
 
     public function category()
     {
-        return $this->BelongsTo('App\Category');
+        return $this->BelongsTo('Modules\Customer\Entities\Category');
     }
     
 }

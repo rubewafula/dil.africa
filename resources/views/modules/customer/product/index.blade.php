@@ -2,13 +2,26 @@
 
 @section('content')
 
-<div class="breadcrumb">
+@php($mini_category = $product->category)
+@php($mini_category_name = $mini_category->name)
+@php($sub_category = \Modules\Customer\Entities\Category::find($mini_category->depends_on))
+@php($category = \Modules\Customer\Entities\Category::find($sub_category->depends_on))
+
+<div class="breadcrumb" style="margin-bottom: 0px;">
     <div class="container">
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Clothing</a></li>
-                <li class='active'>OPPO F5,32GB 6.0" - Dual SIM, Black</li>
+                <li><a href="{{url('/shop')}}">Home</a></li>
+                @if($category != null)
+                <li><a href="{{url('shop/category/'.$category->id)}}">{{$category->name}}</a></li>
+                @endif
+                @if($sub_category != null)
+                <li><a href="{{url('shop/category/'.$sub_category->id)}}">{{$sub_category->name}}</a></li>
+                @endif
+                @if($mini_category != null)
+                <li><a href="{{url('shop/category/'.$mini_category->id)}}">{{$mini_category_name}}</a></li>
+                @endif
+                <li class='active'>{{$product->name}}</li>
             </ul>
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->

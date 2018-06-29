@@ -25,13 +25,13 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo', 'mini_category_id', 'slug',
+    protected $fillable = ['name', 'logo', 'category_id', 'slug',
         'cover_photo', 'description'];
     
     
-    public function mini_category()
+    public function category()
     {
-        return $this->BelongsTo('Modules\Customer\Entities\Mini_category');
+        return $this->BelongsTo('Modules\Customer\Entities\Category');
     }
     
     

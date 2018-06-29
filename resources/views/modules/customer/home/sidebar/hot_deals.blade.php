@@ -4,6 +4,9 @@
     @php($deals = $hot_deal->getHotDeals())
 
     @foreach($deals as $deal)
+    @if($deal->product == null)
+    @continue
+    @endif
     <div class="item">
         <div class="products">
             <div class="hot-deal-wrapper">
@@ -55,7 +58,7 @@
             </div><!-- /.hot-deal-wrapper -->
 
             <div class="product-info text-left m-t-20">
-                <h3 class="name"><a href="{{url('shop/product/detail/'.$product->id)}}">{{$deal->product->name}} </a></h3>
+                <h3 class="name"><a href="{{url('shop/product/detail/'.$deal->product_id)}}">{{$deal->product->name}} </a></h3>
                 <div class="rating rateit-small"></div>
 
                 <div class="product-price">	
@@ -68,15 +71,20 @@
                 </div><!-- /.product-price -->
 
             </div><!-- /.product-info -->
+            @php($productPrice = $deal->product->getActivePrice())
 
             <div class="cart clearfix animate-effect">
                 <div class="action">
 
                     <div class="add-cart-button btn-group">
-                        <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                            <i class="fa fa-shopping-cart"></i>													
-                        </button>
-                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        <form method="POST" action="{{url('shop/add_to_cart')}}">
+                            <input type="hidden" value="{{$productPrice->id}}" name="product_ref" />
+                            <input type="hidden" value="1" name="quantity" />
+                            <button data-toggle="tooltip" class="btn btn-primary icon addtocart" type="submit" product_ref="{{$productPrice->id}}" title="Add Cart">
+                                <i class="fa fa-shopping-cart"></i>													
+                            </button>
+                            <button class="btn btn-primary cart-btn" type="submit">Add to cart</button>
+                        </form>
 
                     </div>
 

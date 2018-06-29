@@ -14,6 +14,9 @@
         "nilsenj/toastr-laravel": "dev-1.0-stable",
         "nwidart/laravel-modules": "^2.7",
         "watson/breadcrumbs": "^1.0",
+        "omnipay/paypal": "^2.6",
+        "paypal/rest-api-sdk-php": "*",
+        "srmklive/paypal": "~1.0",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {

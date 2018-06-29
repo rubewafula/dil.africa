@@ -1,5 +1,5 @@
 <!-- ============================================================= FOOTER ============================================================= -->
-<footer id="footer" class="footer color-bg">
+<footer id="footer" class="footer color-bg" style="margin-top: 10px;">
 
     <div class="footer-bottom">
         <div class="container">
@@ -18,7 +18,7 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <p>Flex Plaza, Mara Road , Upperhill - Nairobi</p>
+                                    <p>Vision Plaza, Mombasa Road , Nairobi Kenya</p>
                                 </div>
                             </li>
 
@@ -29,7 +29,7 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <p>+(254) 720 442 223<br>+(254) 20 219 000</p>
+                                    <p>+(254) 710 113828<br>+(254) 20 219 000</p>
                                 </div>
                             </li>
 
@@ -40,7 +40,7 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <span><a href="#">info@dilafrica.com</a></span>
+                                    <span><a href="#">info@dil.africa</a></span>
                                 </div>
                             </li>
 
@@ -56,10 +56,10 @@
                     <div class="module-body">
                         <ul class='list-unstyled'>
                             <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                            <li><a href="#" title="About us">Order History</a></li>
+                            <li><a href="#" title="Order History">Order History</a></li>
                             <li><a href="#" title="faq">FAQ</a></li>
-                            <li><a href="#" title="Popular Searches">Specials</a></li>
-                            <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+                            <li><a href="#" title="Where is my order?">Track your Order</a></li>
+                            <li class="last"><a href="#" title="Delivery">Delivery</a></li>
                         </ul>
                     </div><!-- /.module-body -->
                 </div><!-- /.col -->
@@ -71,27 +71,25 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a title="Your Account" href="#">About us</a></li>
-                            <li><a title="Information" href="#">Customer Service</a></li>
-                            <li><a title="Addresses" href="#">Company</a></li>
-                            <li><a title="Addresses" href="#">Investor Relations</a></li>
-                            <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
+                            <li class="first"><a title="About DIL.Africa" href="#">About us</a></li>
+                            <li><a title="Terms" href="{{url('shop/terms-conditions')}}">Terms and Conditions</a></li>
+                            <li><a title="Privacy Policy" href="#">Privacy Policy</a></li>
+                            <li><a title="Return Policy" href="#">Return Policy</a></li>
+                            <li class="last"><a title="Contact Us" href="{{url('shop/contact-us')}}">Contact Us</a></li>
                         </ul>
                     </div><!-- /.module-body -->
                 </div><!-- /.col -->
 
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Why Choose Us</h4>
+                        <h4 class="module-title">Become a DIL.Africa Partner</h4>
                     </div><!-- /.module-heading -->
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-                            <li><a href="#" title="Blog">Blog</a></li>
-                            <li><a href="#" title="Company">Company</a></li>
-                            <li><a href="#" title="Investor Relations">Product Quality</a></li>
-                            <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
+                            <li class="first"><a href="#" title="Sell on DIL">How to Sell on DIL.Africa</a></li>
+                            <li><a href="#" title="Sales Agent">Become a Sales Agent</a></li>
+                            <li><a href="#" title="Logistics Partnership">Become our Logistics Partner</a></li>
                         </ul>
                     </div><!-- /.module-body -->
                 </div>
@@ -105,10 +103,6 @@
                 <ul class="link">
                     <li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="Facebook"></a></li>
                     <li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="Twitter"></a></li>
-                    <li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#" title="GooglePlus"></a></li>
-                    <li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
-                    <li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="PInterest"></a></li>
-                    <li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="Linkedin"></a></li>
                     <li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="Youtube"></a></li>
                 </ul>
             </div>

@@ -25,7 +25,7 @@ class Popular extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_id', 'category'];
+    protected $fillable = ['product_id', 'category_id'];
 
     
     public function product()
@@ -33,33 +33,17 @@ class Popular extends Model
         return $this->BelongsTo('Modules\Customer\Entities\Product');
     }
     
+    public function category()
+    {
+        return $this->BelongsTo('Modules\Customer\Entities\Category');
+    }
+    
     //A Java Service will keep this populated and to a maximum of 20
     public function getPopular(){
         
-        $products = $this->where('category', null)->orderBy('id', 'DESC')->get();
+        $products = $this->orderBy('id', 'DESC')->get();
         
         return $products;
     }
     
-    
-    public function getPopularPhones(){
-        
-        $products = $this->where('category', 'Phones')->orderBy('id', 'DESC')->get();
-        
-        return $products;
-    }
-    
-    public function getPopularFashion(){
-        
-        $products = $this->where('category', 'Fashion')->orderBy('id', 'DESC')->get();
-        
-        return $products;
-    }
-    
-    public function getPopularBooks(){
-        
-        $products = $this->where('category', 'Books')->orderBy('id', 'DESC')->get();
-        
-        return $products;
-    }
 }

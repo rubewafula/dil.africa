@@ -1,6 +1,9 @@
 <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
 
     @foreach($related_products as $product)
+    @if($product->product == null)
+    @continue
+    @endif
     <div class="item item-carousel">
         <div class="products">
 
@@ -22,12 +25,13 @@
                     <div class="rating rateit-small"></div>
                     <div class="description"></div>
 
+                    @php($productPrice = $product->product->getActivePrice())
                     <div class="product-price">	
                         <span class="price">
-                            KShs. {{$product->product->getActivePrice()->offer_price}}				
+                            KShs. {{$productPrice->offer_price}}				
                         </span>
                         <span class="price-before-discount">
-                            KShs. {{$product->product->getActivePrice()->standard_price}}
+                            KShs. {{$productPrice->standard_price}}
                         </span>
 
                     </div><!-- /.product-price -->
@@ -37,22 +41,19 @@
                     <div class="action">
                         <ul class="list-unstyled">
                             <li class="add-cart-button btn-group">
-                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                    <i class="fa fa-shopping-cart"></i>													
-                                </button>
-                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-
+                                <form method="POST" action="{{url('shop/add_to_cart')}}">
+                                    <input type="hidden" value="{{$productPrice->id}}" name="product_ref" />
+                                    <input type="hidden" value="1" name="quantity" />
+                                    <button data-toggle="tooltip" class="btn btn-primary icon addtocart" type="submit" product_ref="{{$productPrice->id}}" title="Add Cart">
+                                        <i class="fa fa-shopping-cart"></i>													
+                                    </button>
+                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                </form>
                             </li>
 
                             <li class="lnk wishlist">
-                                <a class="add-to-cart" href="{{url('shop/product/detail/'.$product->id)}}" title="Wishlist">
+                                <a class="add-to-cart" href="{{url('shop/add_to_wishlist/'.$productPrice->product->id.'/'.$productPrice->id)}}" title="Wishlist">
                                     <i class="icon fa fa-heart"></i>
-                                </a>
-                            </li>
-
-                            <li class="lnk">
-                                <a class="add-to-cart" href="{{url('shop/product/detail/'.$product->id)}}" title="Compare">
-                                    <i class="fa fa-signal"></i>
                                 </a>
                             </li>
                         </ul>

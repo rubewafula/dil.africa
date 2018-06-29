@@ -4,6 +4,9 @@
         <?php ($offers = $special_offer->getSpecialOffers()); ?>
         
         <?php $__currentLoopData = $offers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $offer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($offer->product == null): ?>
+        <?php continue; ?>
+        <?php endif; ?>
         <div class="item">
             <div class="products special-product">
                 <div class="product">

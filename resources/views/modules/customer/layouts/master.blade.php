@@ -14,16 +14,17 @@
 
         <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
-
+        <link rel="stylesheet" href="{{url('assets/css/jquery-ui.css')}}">
         <!-- Customizable CSS -->
         <link rel="stylesheet" href="{{url('assets/css/main.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/blue.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/owl.carousel.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/owl.transitions.css')}}">
         <link rel="stylesheet" href="{{url('assets/css/animate.min.css')}}">
-        <link rel="stylesheet" href="{{url('assets/css/rateit.css')}}">
+        <link rel="stylesheet" href="{{url('assets/css/rateit.css')}}">       
         <link rel="stylesheet" href="{{url('assets/css/bootstrap-select.min.css')}}">
         <link href="{{url('assets/css/lightbox.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url('assets/css/anto_custom.css')}}">
 
         <!-- Icons/Glyphs -->
         <link rel="stylesheet" href="{{url('assets/css/font-awesome.css')}}">
@@ -33,35 +34,45 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
+        <script src="{{url('assets/js/jquery-1.11.1.min.js')}}"></script>
 
     </head>
     <body class="cnt-home">
-        
-        @include('customer::layouts.header')
 
+        <div id="successdialog" title="Success" style="color: #0F7DC2;overflow: hidden;">
+
+        </div>
+
+        <div id="failuredialog" title="Failed" style="color: #CC0000;overflow: hidden;">
+
+        </div>
+
+        @include('customer::layouts.header')
+        @include('customer::layouts/notifications')
         @yield('content')
 
         @include('customer::layouts.footer')
 
-
         <!-- For demo purposes – can be removed on production -->
-
 
         <!-- For demo purposes – can be removed on production : End -->
 
         <!-- JavaScripts placed at the end of the document so the pages load faster -->
-        
-        <script src="{{url('assets/js/jquery-1.11.1.min.js')}}"></script>
+
+        <script src="{{ url('assets/js/jquery-ui.js')}}"></script>
         <script src="{{url('assets/js/bootstrap.min.js')}}"></script>
         <script src="{{url('assets/js/bootstrap-hover-dropdown.min.js')}}"></script>
         <script src="{{url('assets/js/owl.carousel.min.js')}}"></script>
         <script src="{{url('assets/js/echo.min.js')}}"></script>
-        <script src="{{url('assets/js/jquery.easing-1.3.min.js')}}"></script>
+        <script src="{{url('assets/js/jquery.easing-1.3.min.js')}}"></script>     
         <script src="{{url('assets/js/bootstrap-slider.min.js')}}"></script>
         <script src="{{url('assets/js/jquery.rateit.min.js')}}"></script>
-        <script type="text/javascript" src="{{url('assets/js/lightbox.min.js')}}"></script>
+        <script src="{{url('assets/js/lightbox.min.js')}}"></script>
         <script src="{{url('assets/js/bootstrap-select.min.js')}}"></script>
         <script src="{{url('assets/js/wow.min.js')}}"></script>
         <script src="{{url('assets/js/scripts.js')}}"></script>
+        <script src="{{url('assets/js/main.js')}}"></script>
+        <script src="{{url('assets/js/processor.js')}}"></script>
+
     </body>
 </html>

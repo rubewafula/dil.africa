@@ -4,6 +4,9 @@
         @php($offers = $special_offer->getSpecialOffers())
         
         @foreach($offers as $offer)
+        @if($offer->product == null)
+        @continue
+        @endif
         <div class="item">
             <div class="products special-product">
                 <div class="product">

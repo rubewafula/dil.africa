@@ -15,7 +15,7 @@ $( document ).ready(function() {
             timeOut: 5000
         };
         toastr.success('Checkout settings menu on left!', 'Welcome to Modern!');
-    }, 1800);  *//
+    }, 1800);  */
     
     var flot2 = function () {
 

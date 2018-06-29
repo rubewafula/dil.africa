@@ -80,16 +80,6 @@
   top: 4px;
 }
 
-`
-var out = '';
-
-for (var i = 0; i < 101 ; i++) {
-  out += ".pace .pace-progress[data-progress-text=\"" + i + "%\"]:after { right: -" + (200 - (i * 2) + ((i * 14) / 100)) + "px }\n";
-}
-
-out
-`
-
 .pace .pace-activity {
   position: absolute;
   width: 100%;
