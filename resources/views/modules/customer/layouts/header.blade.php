@@ -101,6 +101,20 @@ $(document).ready(function(){
                         @if(Auth::user() == null)
                         <li><a href="{{url('/shop/sign-in')}}"><i class="icon fa fa-lock"></i>Login</a></li>
                         @endif
+                        @if(Auth::check())
+                        <li class="dropdown  navbar-right special-menu">
+                            <a href="{{url('/shop/logout')}}">
+                                <span style="color: #fff;background: #F89530;padding: 3px 5px;border-radius: 3px;">Logout</span>
+                            </a>
+                        </li>
+                        @if(Auth::user()->active == 0)
+                        <li class="dropdown  navbar-right special-menu">
+                            <a href="">
+                                <span style="color: #fff;background: #CC0000;padding: 3px 5px;border-radius: 3px;">Verify Account</span>
+                            </a>
+                        </li>
+                        @endif
+                        @endif
                     </ul>
                 </div><!-- /.cnt-account -->
 
@@ -299,20 +313,7 @@ $(document).ready(function(){
 
                                     </ul>
                                 </li>-->
-                                @if(Auth::check())
-                                <li class="dropdown  navbar-right special-menu">
-                                    <a href="{{url('/shop/logout')}}">
-                                        <span style="color: #fff;background: #F89530;padding: 3px 5px;border-radius: 3px;">Logout</span>
-                                    </a>
-                                </li>
-                                @if(Auth::user()->active == 0)
-                                <li class="dropdown  navbar-right special-menu">
-                                    <a href="">
-                                        <span style="color: #fff;background: #CC0000;padding: 3px 5px;border-radius: 3px;">Verify Account</span>
-                                    </a>
-                                </li>
-                                @endif
-                                @endif
+                                
 <!--                                <li class="dropdown  navbar-right special-menu">
                                     <a href="#">
                                         <span style="font-weight: bold;">Todays offer</span>

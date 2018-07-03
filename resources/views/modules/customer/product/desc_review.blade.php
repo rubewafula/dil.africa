@@ -11,7 +11,14 @@
 
             <div id="description" class="tab-pane in active">
                 <div class="product-tab">
-                    {!!  $product->product_description !!}
+                    <?php 
+
+                    $desc = $product->product_description; 
+
+                    $desc = preg_replace('<img.*src=["\'](.*?)["\'].*(width=(\d+))?.*(height=(\d+))?.*\/>', '<img src="$1" width="100" height="100" />', $desc);
+
+                    ?>
+                    {!! $desc  !!}
                 </div>	
             </div><!-- /.tab-pane -->
 

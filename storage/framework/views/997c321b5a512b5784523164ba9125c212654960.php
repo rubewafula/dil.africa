@@ -101,6 +101,20 @@ $(document).ready(function(){
                         <?php if(Auth::user() == null): ?>
                         <li><a href="<?php echo e(url('/shop/sign-in')); ?>"><i class="icon fa fa-lock"></i>Login</a></li>
                         <?php endif; ?>
+                        <?php if(Auth::check()): ?>
+                        <li class="dropdown  navbar-right special-menu">
+                            <a href="<?php echo e(url('/shop/logout')); ?>">
+                                <span style="color: #fff;background: #F89530;padding: 3px 5px;border-radius: 3px;">Logout</span>
+                            </a>
+                        </li>
+                        <?php if(Auth::user()->active == 0): ?>
+                        <li class="dropdown  navbar-right special-menu">
+                            <a href="">
+                                <span style="color: #fff;background: #CC0000;padding: 3px 5px;border-radius: 3px;">Verify Account</span>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                        <?php endif; ?>
                     </ul>
                 </div><!-- /.cnt-account -->
 
@@ -300,20 +314,7 @@ $(document).ready(function(){
 
                                     </ul>
                                 </li>-->
-                                <?php if(Auth::check()): ?>
-                                <li class="dropdown  navbar-right special-menu">
-                                    <a href="<?php echo e(url('/shop/logout')); ?>">
-                                        <span style="color: #fff;background: #F89530;padding: 3px 5px;border-radius: 3px;">Logout</span>
-                                    </a>
-                                </li>
-                                <?php if(Auth::user()->active == 0): ?>
-                                <li class="dropdown  navbar-right special-menu">
-                                    <a href="">
-                                        <span style="color: #fff;background: #CC0000;padding: 3px 5px;border-radius: 3px;">Verify Account</span>
-                                    </a>
-                                </li>
-                                <?php endif; ?>
-                                <?php endif; ?>
+                                
 <!--                                <li class="dropdown  navbar-right special-menu">
                                     <a href="#">
                                         <span style="font-weight: bold;">Todays offer</span>
