@@ -1,0 +1,36 @@
+/* Write your custom CSS here */
+
+.top-section
+{
+
+ border-style: solid;
+ background-color: #fff;
+ border-width: 1px;
+ border-radius: 5px;
+
+}
+
+.voucher{
+
+border-style: solid;
+ background-color: #fff;
+ border-width: 1px;
+ border-radius: 5px;
+	
+}
+
+.blue-bg{
+	background: #0F7DC2;
+}
+
+.orange-bg{
+	background: #ffa200;
+}
+
+.blue-fg{
+	color: #0F7DC2;
+}
+
+.orange-fg{
+	color: #ffa200;
+}

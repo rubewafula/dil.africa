@@ -28,7 +28,7 @@ class CitiesController extends Controller
             $cities = City::latest()->paginate($perPage);
         }
 
-        return view('backend.cities.index', compact('cities'));
+        return view('backend::cities.index', compact('cities'));
     }
 
     /**
@@ -38,7 +38,7 @@ class CitiesController extends Controller
      */
     public function create()
     {
-        return view('backend.cities.create');
+        return view('backend::cities.create');
     }
 
     /**
@@ -50,9 +50,7 @@ class CitiesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-			'name' => 'required'
-		]);
+        
         $requestData = $request->all();
         
         City::create($requestData);
@@ -71,7 +69,7 @@ class CitiesController extends Controller
     {
         $city = City::findOrFail($id);
 
-        return view('backend.cities.show', compact('city'));
+        return view('backend::cities.show', compact('city'));
     }
 
     /**
@@ -85,7 +83,7 @@ class CitiesController extends Controller
     {
         $city = City::findOrFail($id);
 
-        return view('backend.cities.edit', compact('city'));
+        return view('backend::cities.edit', compact('city'));
     }
 
     /**
@@ -98,9 +96,7 @@ class CitiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-			'name' => 'required'
-		]);
+        
         $requestData = $request->all();
         
         $city = City::findOrFail($id);

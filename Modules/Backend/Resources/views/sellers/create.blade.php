@@ -1,17 +1,25 @@
 @extends('backend::layouts.master')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+                <div class="page-breadcrumb" >
+                    {{ Breadcrumbs::render() }}
 
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Create New Seller</div>
-                    <div class="card-body">
-                        <a href="{{ url('/backend/sellers') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <br />
-                        <br />
+                </div>
+                <div class="page-title">
+                    <div class="container">
+                        <h3>  New Seller </h3>
+                    </div>
+                </div>
+                <div id="main-wrapper" class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                </div>
+                                 <a href="{{ url('/backend/sellers') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                                <div class="panel-body">
 
+                                                            
                         @if ($errors->any())
                             <ul class="alert alert-danger">
                                 @foreach ($errors->all() as $error)
@@ -20,15 +28,26 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/backend/sellers', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        <form method="POST" action="{{ url('/backend/sellers') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                            {{ csrf_field() }}
 
-                        @include ('backend::sellers.form')
+                            @include ('backend::sellers.form')
 
-                        {!! Form::close() !!}
-
+                        </form>
+                                  
+                                </div>
+                            </div>
+                           
+                           
+                           
+                        </div>
+                    </div><!-- Row -->
+                </div><!-- Main Wrapper -->
+                <div class="page-footer">
+                    <div class="container">
+                        <p class="no-s"><?php echo date('Y') ?>&copy; </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-@endsection
+       
+
+ @endsection

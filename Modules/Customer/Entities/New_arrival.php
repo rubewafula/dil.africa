@@ -4,6 +4,8 @@ namespace Modules\Customer\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Cache;
+
 class New_arrival extends Model
 {
     /**
@@ -35,8 +37,19 @@ class New_arrival extends Model
     
     //A Java Service will keep this populated and to a maximum of 20
     public function getNewArrivals(){
+
+        if(Cache::has('new_arrivals')) {
+
+            $products = Cache::get('new_arrivals');
+
+        }else{
         
-        $products = $this->orderBy('id', 'DESC')->get();
+            $products = $this->orderBy('priority')->limit(15)->get();
+
+            $minutes = 15;
+
+            Cache::add('new_arrivals', $products, $minutes);
+        }
         
         return $products;
     }

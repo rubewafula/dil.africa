@@ -4,6 +4,8 @@ namespace Modules\Customer\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Cache;
+
 class Best_seller_brand extends Model
 {
     /**
@@ -34,8 +36,19 @@ class Best_seller_brand extends Model
     }
     
     public function getBestSellerBrands(){
+
+        if(Cache::has('top_brands')) {
+
+            $brands = Cache::get('top_brands');
+
+        }else{
         
-        $brands = $this->orderBy('id', 'DESC')->get();
+            $brands = $this->orderBy('id', 'DESC')->get();
+
+            $minutes = 20;
+
+            Cache::add('top_brands', $brands, $minutes);
+        }
         
         return $brands;
     }

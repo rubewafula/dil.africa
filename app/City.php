@@ -27,5 +27,14 @@ class City extends Model
      */
     protected $fillable = ['name', 'country_id'];
 
+	 public function  country()
+	 {
+		 
+		 return  $this->BelongsTo('App\Country');
+	 } 
+		 
+		 
+	
+	
     
 }

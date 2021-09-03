@@ -1,8 +1,16 @@
-<div class='col-md-3 sidebar'>
+<div class='col-md-3 hidden-xs sidebar'>
     <div class="sidebar-module-container">
-        <div class="home-banner outer-top-n"> <a href="#"><img src="<?php echo e(url('assets/images/cash-on-delivery.png')); ?>" alt="cash-on-delivery"></a>
-            <a href="#"><img src="<?php echo e(url('assets/images/genuine-products.png')); ?>" alt="genuine-products"></a>
-            <a href="#"><img src="<?php echo e(url('assets/images/FAQs.png')); ?>" alt="FAQS"></a>
+        <div class="home-banner outer-top-n"> 
+            <!-- <a href="#"> -->
+                <img src="<?php echo e(url('assets/images/cash-on-delivery.png')); ?>" alt="cash-on-delivery">
+            <!-- </a> -->
+            <!-- <a href="#"> -->
+                <img src="<?php echo e(url('assets/images/genuine-products.png')); ?>" alt="genuine-products">
+            <!-- </a> -->
+            <img src="<?php echo e(url('assets/images/same_day_delivery.png')); ?>" alt="genuine-products">
+            <a href="<?php echo e(url('shop/faq')); ?>">
+                <img src="<?php echo e(url('assets/images/FAQs.png')); ?>" alt="FAQS">
+            </a>
         </div>		
 
         <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">

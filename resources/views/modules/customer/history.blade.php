@@ -33,41 +33,60 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 user-header" style="margin-top: 10px;">
+                                        <div class="col-md-12 user-header" style="margin-top: 10px;padding: 10px 0px;background: #ffa200;text-align: center;color: #FFF;">
                                             Orders History
                                         </div>
                                     </div>
 
-                                    <table id="topup_numberstable" class="table table-striped table-bordered" style="width:100%;">
-                                        <thead>
-                                            <tr style="background:#fff;color:#337AB7;">
-                                                <th>Date</th>
-                                                <th>Order Reference</th>
-                                                <th>Total Value</th>                                        
-                                                <th>Shipping Cost</th>
-                                                <th>Transaction Cost</th>
-                                                <th>Order Status</th>
-                                            </tr>
-                                        </thead>
+                                    <style> 
+                                        .col-padding{
+                                            padding:  5px 15px;
+                                        }
+                                    </style>
 
-                                        <tbody>
-                                            @foreach($orders as $order)
+                                    <div id="topup_numberstable" class="row hidden-xs" style="background:#ddd;color:#337AB7;padding: 10px 0px;font-weight: bold;">
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Date</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Order Reference</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Total Value</div>
+                                        <div class="col-md-1 col-xs-12 col-sm-12 col-padding">Shipping</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Transaction Cost</div>
+                                        <div class="col-md-1 col-xs-12 col-sm-12 col-padding">Status</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Tran. Document</div>                    
+                                    </div>
 
-                                            <tr>
-                                                <td>{{$order->created_at}}</td>
-                                                <td>{{$order->order_reference}}</td>
-                                                <td>{{$order->total_value}}</td>
-                                                <td>{{$order->shipping_cost}}</td>                
-                                                <td>{{$order->transaction_cost}}</td>
-                                                <td>
-                                                    {{($order->order_status != null)?$order->order_status:"NEW"}}
-                                                </td>
+                                    @foreach($orders as $order)
 
-                                            </tr>						
+                                    <div class="row" style="background:#fff;padding: 10px 0px;border-bottom: 1px solid #ddd;">
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Date: </span>{{$order->created_at}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Ref.: </span>{{$order->order_reference}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Total Value: </span> {{$order->total_value}}
+                                        </div>
+                                        <div class="col-md-1 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Shipping: </span> {{$order->shipping_cost}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Transaction Cost: </span> {{$order->transaction_cost}}
+                                        </div>
+                                        <div class="col-md-1 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Status: </span> {{($order->order_status != null)?str_replace("_", " ", $order->order_status):"NEW"}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Tran. Document: </span>
+                                            <a href="{{url('/shop/order/invoice/view/'.$order->id)}}" target="_blank">
+                                                View
+                                            </a>
+                                            <a style="color: #ffa200;padding-left: 5px;" href="{{url('/shop/order/invoice/download/'.$order->id)}}">
+                                                Download
+                                            </a>
+                                        </div>                 
+                                    </div>					
 
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                    @endforeach
 
                                 </div>
                             </div>

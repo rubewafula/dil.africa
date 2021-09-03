@@ -1,0 +1,774 @@
+<?php $__env->startSection('content'); ?>
+
+<script>
+
+    $(document).ready(function(){
+
+        $('#city').select2();
+
+        $('#city_pickup').select2();
+        $('#country_id').select2();
+        $('#zone').select2();
+        $('#pickup_location').select2();
+    
+    var BASE_URL = "<?php echo e(url('/shop/')); ?>";
+    
+    $('input[name="preferred_shippingmode"]').change(function(){
+        var selected = $('input[name="preferred_shippingmode"]:checked').val();       
+        
+        if(selected == 2){
+
+            $("#home_delivery_div").hide();
+            $("#pickup_station_div").show(); 
+            $("#selection_message").html("You have chosen to pick up your items \n\
+                from one of our pickup stations. If you have not set a preferred\n\
+                pickup station, please proceed to do so. If you have set a preferred \n\
+                pickup station, this will be chosen by default. You can \n\
+                however scroll down to change this. If you wish to \n\
+                have delivery done to a preferred location instead, choose\n\
+                'Delivery Address'");
+        }else if(selected == 1){
+
+            $("#pickup_station_div").hide();
+            $("#home_delivery_div").show(); 
+            $("#selection_message").html("'Delivery Address' selected.\n\
+              If you wish to pick up from one of our pick\n\
+              up stations instead, choose 'Pickup Station'");
+        }
+        var filedata = new FormData();
+        
+        filedata.append('delivery_type', selected);
+        $.ajax({
+            url: BASE_URL + "/delivery-type",
+            data: filedata,
+            cache: false,
+            processData: false, // Don't process the files
+            contentType: false,
+            type: 'post',
+            success: function (output) {
+
+                if (output.status == '200') {                   
+
+                }else {}
+            }
+        });
+    });
+
+
+    $("#city_pickup").change(function(){
+        
+        var city_id = $(this).val();
+        var filedata = new FormData();
+        
+        filedata.append('city', city_id);
+        $.ajax({
+            url: BASE_URL + "/pickup-points",
+            data: filedata,
+            cache: false,
+            processData: false, // Don't process the files
+            contentType: false,
+            type: 'post',
+            success: function (output) {
+
+                if (output.status == '200') {
+                    
+                    $("#pickup_location").html(output.html);                              
+                }
+            }
+        });
+        
+    });
+    
+});
+</script>
+
+<style type="text/css">
+
+input[type=text] {
+
+    border: 1px solid #aaa;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 35px;
+}
+
+</style>
+
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                <li class='active'><a href="<?php echo e(url('shop/checkout')); ?>">Checkout</a></li>
+                <li class='active'><a href="<?php echo e(url('shop/checkout/delivery')); ?>">Address</a></li>
+                <li class='active'><a href="<?php echo e(url('shop/checkout/payment')); ?>">Payment</a></li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<style>
+.info-title {
+    font-family: 'Open Sans', sans-serif, sans-serif;
+    font-weight: normal;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+</style>
+
+<div class="body-content">
+    <div class="container">
+        <div class="checkout-box ">
+
+            <div class="panel panel-default" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="radio" name="preferred_shippingmode" value="1" checked="true">Delivery Address &nbsp;&nbsp; 
+                        <input type="radio" name="preferred_shippingmode" value="2">Pickup Station 
+                    </div>
+                    <div class="col-md-8">
+                        <span id="selection_message" style="line-height: 1.8em;color: #ffa200;"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="home_delivery_div">
+                <div class="col-md-12">
+                    <div class="panel-group checkout-steps" id="accordion" >
+                        <!-- checkout-step-01  -->
+                        <div class="panel panel-default checkout-step-01" style="padding: 10px 20px;">
+
+                            <!-- panel-heading -->
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">
+                                    <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne-">
+                                        <span>1</span>Delivery Address Information
+                                    </a>
+                                </h4>
+                            </div>
+                            <!-- panel-heading -->
+
+                            <div id="collapseOne" class="panel-collapse collapse in">
+
+                                <!-- panel-body  -->
+                                <div class="panel-body" style="background: #f5f5f5;padding: 7px 20px">
+
+                                    <div class="row">
+
+                                        <div class="col-md-8 col-sm-12 col-xs-12" style="background: #fff;padding: 10px;margin-bottom: 10px;">
+
+                                            <form class="address-form" role="form" method="POST" action="<?php echo e(url('shop/checkout/save-address')); ?>">
+                                                <input type="hidden" name="user_id" value="<?php echo e($userId); ?>"/>
+                                                <input type="hidden" name="user_address_id" value="<?php echo e(isset($user_address)?$user_address->id:""); ?>"/>
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 already-registered-login">                                                                                     
+                                                        <div class="form-group">
+                                                            <label class="info-title" for="telephone">Your Phone Number <span>*</span></label>
+                                                            <?php ($phone = ""); ?>
+                                                            <?php if(isset($user_address)): ?>
+                                                            <?php if($user_address->telephone != null): ?>
+                                                            <?php ($phone = $user_address->telephone); ?>
+                                                            <?php elseif(isset($user)): ?>
+                                                            <?php if($user->phone != null): ?>
+                                                            <?php ($phone = $user->phone); ?>
+                                                            <?php endif; ?>
+                                                            <?php endif; ?>
+                                                            <?php elseif(isset($user)): ?>
+                                                            <?php if($user->phone != null): ?>
+                                                            <?php ($phone = $user->phone); ?>
+                                                            <?php endif; ?>
+                                                            <?php endif; ?>
+                                                            <input type="text" class="form-control unicase-form-control text-input" 
+                                                            id="telephone" name="telephone" placeholder="" value="<?php echo e($phone); ?>"/>
+                                                        </div>
+                                                    </div>
+                                                <!-- <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="country">Country <span></span></label>
+                                                        <?php ($countries = \Modules\Customer\Entities\Country::pluck('name', 'id')); ?>
+
+                                                        <?php echo Form::select('country_id', $countries, isset($user_address)?$user_address->country_id:null, ['class' => 'form-control unicase-form-control text-input country-select', 
+                                                        'id'=>'country_id', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="city">City / Town </label>
+                                                        <?php ($cities =  \Modules\Customer\Entities\City::pluck('name', 'id')); ?>
+
+                                                        <?php echo Form::select('city_id', $cities, isset($user_address)?$user_address->city_id:null, ['class' => 'form-control unicase-form-control text-input city-select', 
+                                                        'id'=>'city', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="area">Zone <span></span></label>
+                                                        <?php ($zone_id = isset($user_address)?$user_address->zone_id:0); ?>
+                                                        <?php ($zones = \Modules\Customer\Entities\Zone::pluck('name', 'id')); ?>
+
+                                                        <?php echo Form::select('zone_id', $zones, isset($user_address)?$user_address->zone_id:null, ['class' => 'form-control unicase-form-control text-input zone-select', 
+                                                        'id'=>'zone', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="area">Area <span></span></label>
+                                                        <?php ($area_id = isset($user_address)?$user_address->google_area:""); ?>
+                                                        <?php ($areas = \Modules\Customer\Entities\Area::pluck('name', 'id')); ?>
+
+                                                        <?php echo Form::text('google_area', isset($user_address)?$user_address->google_area:null, ['class' => 'form-control unicase-form-control text-input area-select', 
+                                                        'id'=>'area', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="street">Street <span>*</span></label>
+                                                        <input type="text" class="form-control unicase-form-control text-input"
+                                                               id="street" name="street" placeholder="" value="<?php echo e(isset($user_address)?$user_address->street:""); ?>"/>
+                                                    </div>                 
+                                                </div> 
+                                                <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="building">Building Name <span></span></label>
+                                                        <input type="text" class="form-control unicase-form-control text-input"
+                                                               id="building" name="building" placeholder="" value="<?php echo e(isset($user_address)?$user_address->building:""); ?>"/>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <style type="text/css">
+
+                                            #delivery_address {
+
+                                                border-style: inset;
+                                                overflow: auto;
+                                                outline: none;
+                                                border: 1px solid #aaa;
+                                                -webkit-box-shadow: none;
+                                                -moz-box-shadow: none;
+                                                box-shadow: none;
+                                                resize: none;
+                                            }
+                                        </style>
+                                        <div class="row">
+
+                                                <!-- <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="floor">Floor <span></span></label>
+                                                        <input type="text" class="form-control unicase-form-control text-input"
+                                                               id="floor" name="floor" placeholder="" value="<?php echo e(isset($user_address)?$user_address->floor:""); ?>"/>
+                                                    </div>
+                                                </div>     -->                                                                                   
+                                                <!-- <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="landmark">Landmark <span></span></label>
+                                                        <input type="text" class="form-control unicase-form-control text-input"
+                                                               id="landmark" name="landmark" placeholder="" value="<?php echo e(isset($user_address)?$user_address->landmark:""); ?>"/>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group" style="margin: 0px 15px 0px 15px;">
+                                                        <label class="info-title" for="address_info">Delivery Address <span></span></label>
+                                                        <textarea id="delivery_address" class="form-control unicase-form-control text-input" rows="4"  
+                                                        name="delivery_address" placeholder="Street Name/Building/Apartment No./Floor"><?php echo e(isset($user_address)?$user_address->delivery_address:""); ?></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-12 col-sm-12 already-registered-login" style="margin-left: 15px;">
+                                                    <?php ($address_id = isset($user_address)?$user_address->id:"0"); ?>
+
+                                                    <?php ($cart = Session::get('cart')); ?>
+
+                                                    <!-- <?php echo e(print_r($cart)); ?> -->
+                                                    <?php if($cart != null): ?>
+                                                    <?php if(count($cart) > 0): ?>
+                                                    <button type="submit" class="btn-upper btn btn-primary checkout-page-button" style="background: #ffa200;">Proceed to Payment Options</button>
+                                                    <?php else: ?>
+                                                    <button type="submit" class="btn-upper btn btn-primary checkout-page-button" >Save Address Information</button>
+                                                    <?php endif; ?>
+                                                    <?php else: ?>
+                                                    <button type="submit" class="btn-upper btn btn-primary checkout-page-button" >Save Address Information</button>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- already-registered-login -->	
+
+                                    </div>
+
+                                </div>
+
+                                <?php ($cart_items = Session::get('cart_items')); ?>
+                                <?php ($no_of_items = count($cart_items)); ?>
+
+                                <div class="col-md-4 animate-dropdown hidden-sm hidden-xs" style="line-height: 1.8em;">
+
+                                    <div style="background: #fff;padding: 10px;">
+
+                                        <?php if(count($cart_items) > 0): ?>
+                                        <div style="border-bottom: 1px solid #ddd;font-weight: bold;font-size: 14px;padding: 2px;">
+                                            YOUR ORDER (<?php echo e($no_of_items); ?> <?php if($no_of_items == 1): ?> item <?php else: ?> items <?php endif; ?>)
+                                        </div>
+                                        <?php ($subtotal = 0); ?>
+                                        <?php $__currentLoopData = $cart_items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>    
+                                        <?php ($product_id = \Modules\Customer\Entities\Product_price::find($item->getProductPriceId())->product_id); ?>
+                                        <?php ($slug = \Modules\Customer\Entities\Product::find($product_id)->slug); ?>
+                                        <div class="cart-item product-summary">
+                                            <input type="hidden" class="product_id_class" value="<?php echo e($item->getProductPriceId()); ?>"/>
+                                            <div class="row" style="padding-top: 10px;">
+                                                <div class="col-xs-3 col-sm-3">
+                                                    <div class="image">
+                                                        <img src="<?php echo e(url('assets/images/products/'.$item->getProductImage())); ?>" width="80px" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-9 col-sm-9" style="padding-top: 5px;">
+
+                                                    <div class="">
+
+                                                        <span style="font-weight: bold;"><?php echo e($item->getProductName()); ?> </span>
+
+                                                        <div class="price">
+                                                            Quantity: <?php echo e($item->getQuantity()); ?>
+
+                                                        </div>
+                                                        <div class="price" style="color: #ffa200;">
+                                                            KSh. <?php echo e(number_format($item->getUnitPrice())); ?>
+
+                                                        </div>
+                                                        <div class="price" style="color: #0f7dc2;">
+                                                            Total Price: <span style="font-weight: bold;">KSh. <?php echo e(number_format($item->getSubtotal())); ?></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.cart-item -->
+                                        <?php ($subtotal += $item->getSubtotal()); ?>
+                                        <div style="border-bottom: 1px solid #ddd;margin:5px 0px 15px 0px;"></div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <div style="padding: 0px 15px;font-size: 14px;line-height: 1.8em;">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 cart-item product-summary">
+                                                    Subtotal
+                                                </div>
+                                                <?php ($sub_t = $item->getSubtotal()); ?>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="price" style="text-align: right;"> KSh. <?php echo e(number_format($sub_t)); ?></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 cart-item product-summary">
+                                                    VAT
+                                                </div>
+                                                <?php ($sub_t = $item->getSubtotal()); ?>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="price" style="text-align: right;"> KSh. 0</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 cart-item product-summary" style="font-weight: bold;"> 
+                                                    Total
+                                                </div>
+                                                <?php ($sub_t = $item->getSubtotal()); ?>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="price" style="text-align: right;color: #ffa200;font-size: 16px;"> KSh. <?php echo e(number_format($sub_t)); ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>  
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12" style="padding: 0px;">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body"  style="border: 1px solid #ddd;">
+
+                                            <div class="row" style="padding-top: 15px;line-height: 1.8em;background: #f5f5f5;margin: 0px;">
+
+                                                <div class="col-md-8 col-sm-8">  
+                                                    My Addresses
+                                                </div>
+                                                <div class="col-md-4 col-sm-4">
+                                                    <?php echo Form::open(['method' => 'GET', 'url' => '/shop/delivery', 'class' => 'navbar-form navbar-right', 'role' => 'search', 'style' => 'margin-top:0px;']); ?>
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="search" placeholder="Search...">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="submit">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                    <?php echo Form::close(); ?>
+
+                                                </div>
+                                            </div>
+
+                                            <?php if(isset($addresses)): ?>
+                                            <?php if(count($addresses)  > 0): ?>
+                                            <div class="row" style="background:#ddd;color:#337AB7;padding: 10px 0px;margin: 0px;font-weight: bold;">
+                                                <div class="col-md-2 col-xs-12 col-sm-12">Building</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12">Floor</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12">Street</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12">Area</div>
+                                                <div class="col-md-1 col-xs-12 col-sm-12">City</div>
+                                                <div class="col-md-1 col-xs-12 col-sm-12">Country</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12"></div>                    
+                                            </div>
+
+                                            <?php $__currentLoopData = $addresses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $address): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                            <div class="row" style="background:#fff;padding: 10px 0px;">
+                                                <div class="col-md-2 col-xs-12 col-sm-12"><?php echo e($address->building); ?></div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12"><?php echo e($address->floor); ?></div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12"><?php echo e($address->street); ?></div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12"><?php echo e(($address->area != null)?$address->area->name:""); ?></div>
+                                                <div class="col-md-1 col-xs-12 col-sm-12"><?php echo e(($address->city != null)?$address->city->name:""); ?></div>
+                                                <div class="col-md-1 col-xs-12 col-sm-12"><?php echo e(($address->country != null)?$address->country->name:""); ?></div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12">
+
+                                                    <?php if($address->default != 1): ?>
+                                                    <form method="POST" action="<?php echo e(url('shop/address/makedefault')); ?>">
+
+                                                        <input type="hidden" value="<?php echo e($address->id); ?>" name="address" />
+                                                        <button data-toggle="tooltip" class="btn btn-primary" type="submit" title="Make Default Address">
+                                                            Make Default                                                
+                                                        </button>
+                                                    </form>
+                                                    <?php else: ?> 
+                                                    <span style="color: #F89530;font-weight: bold;">Default Address</span>
+                                                    <?php endif; ?>
+                                                </div>                    
+                                            </div>
+
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+                                            <?php endif; ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.row -->
+                        </div>
+                        <!-- panel-body  -->
+
+                    </div><!-- row -->
+                </div>
+                <!-- checkout-step-01  -->
+
+            </div><!-- /.checkout-steps -->
+        </div>
+
+    </div><!-- /.row -->
+
+    <style type="text/css">
+
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+
+<div class="row" id="pickup_station_div">
+    <div class="col-md-12">
+        <div class="panel-group checkout-steps" id="accordion">
+            <!-- checkout-step-01  -->
+            <div class="panel panel-default checkout-step-01">
+
+                <!-- panel-heading -->
+                <div class="panel-heading">
+                    <h4 class="unicase-checkout-title">
+                        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOneggg">
+                            <span>1</span>Pick up Station
+                        </a>
+                    </h4>
+                </div>
+                <!-- panel-heading -->
+
+                <div id="collapseOne" class="panel-collapse collapse in">
+
+                    <!-- panel-body  -->
+                    <div class="panel-body">
+                        <div class="row">	
+
+                            <div class="col-md-8 col-sm-12 col-xs-12" style="background: #fff;padding: 10px;margin-bottom: 10px;">	
+                                <form class="address-form" role="form" method="POST" action="<?php echo e(url('shop/checkout/save-pickup-station')); ?>">
+                                    <input type="hidden" name="user_pickuplocation_id" value="<?php echo e(isset($user_pickuplocation)?$user_pickuplocation->id:""); ?>"/>
+                                    <input type="hidden" name="user_id" value="<?php echo e($userId); ?>"/>
+                                    <div class="row">
+
+                                                <!-- <div class="col-md-4 col-sm-6 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="country">Country <span class="astk">*</span></label>
+
+                                                        <?php echo Form::select('country', $countries, isset($user_pickuplocation)?$user_pickuplocation->warehouse->area->zone->city->country->id:null, ['class' => 'form-control unicase-form-control text-input country-select', 
+                                                        'id'=>'country', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="city">City / Town <span class="astk">*</span></label>
+
+                                                        <?php echo Form::select('city', $cities, isset($user_pickuplocation)?$user_pickuplocation->warehouse->area->zone->city->id:null, ['class' => 'form-control unicase-form-control text-input city-select', 
+                                                        'id'=>'city_pickup', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="area">Zone <span class="astk">*</span></label>
+
+                                                        <?php echo Form::select('zone', $zones, isset($user_pickuplocation)?$user_pickuplocation->warehouse->area->zone->id:null, ['class' => 'form-control unicase-form-control text-input zone-select', 
+                                                        'id'=>'zone', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                            <div class="row">
+                                                <!-- <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="area">Area <span class="astk">*</span></label>
+
+                                                        <?php echo Form::select('area', $areas, isset($user_pickuplocation)?$user_pickuplocation->warehouse->area->id:null, ['class' => 'form-control unicase-form-control text-input area-select', 
+                                                        'id'=>'area', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="street">Pickup Station <span class="astk">*</span></label>
+                                                        <?php ($pickup_location_id = isset($user_pickuplocation)?$user_pickuplocation->id:0); ?>
+
+                                                        <!-- <?php ($pickup_locations = \Modules\Customer\Entities\Warehouse::where('is_pickup_location', 1)->pluck('name', 'id')); ?> -->
+
+                                                        <?php ($pickup_locations = \Modules\Customer\Entities\Warehouse::join('cities', 'warehouses.city_id', '=', 
+                                                        'cities.id')->select(DB::raw("CONCAT(CamelCase(warehouses.name),' (', UCASE(cities.name), ')' ) AS name"), 'warehouses.id')->where('is_pickup_location', 1)->pluck('name', 'id')); ?>
+
+                                                        <?php echo Form::select('pickup_location', $pickup_locations, isset($user_pickuplocation)?$user_pickuplocation->id:null, ['class' => 'form-control unicase-form-control text-input', 
+                                                        'id'=>'pickup_location', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>                 
+                                                </div>
+                                            </div> 
+
+                                            <!-- <div class="row">
+                                                <div class="col-md-12 col-sm-12 already-registered-login">
+                                                    <div class="form-group">
+                                                        <label class="info-title" for="default">Set this up as your preferred pickup location? <span></span></label>
+                                                        <?php ($options = ['0' => 'No', '1' => 'Yes']); ?>
+                                                        <?php echo Form::select('default', $options, isset($user_pickuplocation)?$user_pickuplocation->default:null, ['class' => 'form-control unicase-form-control text-input', 
+                                                        'id'=>'default', 'placeholder'=>'', 'required' => 'required']); ?>
+
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                            <div class="row">
+
+                                                <div class="col-md-4 col-sm-6 already-registered-login payment-thing">
+                                                   <?php if(count($cart_items) > 0): ?>
+
+                                                   <button type="submit" class="btn-upper btn btn-primary checkout-page-button" style="margin-bottom: 25px;background: #ffa200;">Proceed to Payment Options</button>
+
+                                                   <?php else: ?>
+                                                   <button type="submit" class="btn-upper btn btn-primary checkout-page-button" style="margin-bottom: 25px;">Update Pickup Station Details</button>
+                                                   <?php endif; ?>
+                                                   
+                                               </div>
+                                           </div>
+                                       </form>
+                                       <!-- already-registered-login -->	
+
+                                   </div>
+
+                                   <div class="col-md-4 animate-dropdown hidden-sm hidden-xs" style="line-height: 1.8em;">
+
+                                    <div style="background: #fff;padding: 10px;">
+
+                                        <?php if(count($cart_items) > 0): ?>
+                                        <div style="border-bottom: 1px solid #ddd;font-weight: bold;font-size: 14px;padding: 2px;">
+                                            YOUR ORDER (<?php echo e($no_of_items); ?> <?php if($no_of_items == 1): ?> item <?php else: ?> items <?php endif; ?>)
+                                        </div>
+                                        <?php ($subtotal = 0); ?>
+                                        <?php $__currentLoopData = $cart_items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>    
+                                        <?php ($product_id = \Modules\Customer\Entities\Product_price::find($item->getProductPriceId())->product_id); ?>
+                                        <?php ($slug = \Modules\Customer\Entities\Product::find($product_id)->slug); ?>
+                                        <div class="cart-item product-summary">
+                                            <input type="hidden" class="product_id_class" value="<?php echo e($item->getProductPriceId()); ?>"/>
+                                            <div class="row" style="padding-top: 10px;">
+                                                <div class="col-xs-3 col-sm-3">
+                                                    <div class="image">
+                                                        <img src="<?php echo e(url('assets/images/products/'.$item->getProductImage())); ?>" width="80px" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-9 col-sm-9" style="padding-top: 5px;">
+
+                                                    <div class="">
+
+                                                        <span style="font-weight: bold;"><?php echo e($item->getProductName()); ?> </span>
+
+                                                        <div class="price">
+                                                            Quantity: <?php echo e($item->getQuantity()); ?>
+
+                                                        </div>
+                                                        <div class="price" style="color: #ffa200;">
+                                                            KSh. <?php echo e(number_format($item->getUnitPrice())); ?>
+
+                                                        </div>
+                                                        <div class="price" style="color: #0f7dc2;">
+                                                            Total Price: <span style="font-weight: bold;">KSh. <?php echo e(number_format($item->getSubtotal())); ?></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.cart-item -->
+                                        <?php ($subtotal += $item->getSubtotal()); ?>
+                                        <div style="border-bottom: 1px solid #ddd;margin:5px 0px 15px 0px;"></div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <div style="padding: 0px 15px;font-size: 14px;line-height: 1.8em;">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 cart-item product-summary">
+                                                    Subtotal
+                                                </div>
+                                                <?php ($sub_t = $item->getSubtotal()); ?>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="price" style="text-align: right;"> KSh. <?php echo e(number_format($sub_t)); ?></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 cart-item product-summary">
+                                                    VAT
+                                                </div>
+                                                <?php ($sub_t = $item->getSubtotal()); ?>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="price" style="text-align: right;"> KSh. 0</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 cart-item product-summary" style="font-weight: bold;"> 
+                                                    Total
+                                                </div>
+                                                <?php ($sub_t = $item->getSubtotal()); ?>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="price" style="text-align: right;color: #ffa200;font-size: 16px;"> KSh. <?php echo e(number_format($sub_t)); ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>  
+                                </div>	
+
+                            </div>
+
+                            <div class="row" style="margin: 0px -30px;">
+
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+
+                                            <div class="row" style="padding-top: 15px;line-height: 1.8em;background: #f5f5f5;margin: 0px;">
+
+                                                <div class="col-md-8 col-sm-8">  
+                                                    My Pick Up Stations
+                                                </div>
+                                                <div class="col-md-4 col-sm-4">
+                                                    <?php echo Form::open(['method' => 'GET', 'url' => '/shop/delivery/stations', 'class' => 'navbar-form navbar-right', 'role' => 'search', 'style' => 'margin-top:0px;']); ?>
+
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="search" placeholder="Search...">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="submit">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                    <?php echo Form::close(); ?>
+
+                                                </div>
+                                            </div>
+
+                                            <?php if(isset($stations)): ?>
+                                            <div id="stations_table" class="row hidden-xs" style="background:#ddd;color:#337AB7;padding: 10px 0px;font-weight: bold;">
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Pickup Station</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Area</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Zone</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">City</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Country</div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding"></div>                    
+                                            </div>
+
+                                            <?php $__currentLoopData = $stations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $station): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                            <div class="row" style="background:#fff;padding: 10px 0px;border-bottom: 1px solid #ddd;">
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                                    <span class="hidden-lg hidden-md blue-text"> Pickup Station: </span><?php echo e($station->warehouse->name); ?>
+
+                                                </div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                                    <span class="hidden-lg hidden-md blue-text"> Area: </span><?php echo e($station->warehouse->area->name); ?>
+
+                                                </div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                                    <span class="hidden-lg hidden-md blue-text"> Zone: </span> <?php echo e($station->warehouse->area->zone->name); ?>
+
+                                                </div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                                    <span class="hidden-lg hidden-md blue-text"> City: </span> <?php echo e($station->warehouse->area->zone->city->name); ?>
+
+                                                </div>
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                                    <span class="hidden-lg hidden-md blue-text"> Country: </span> <?php echo e($station->warehouse->area->zone->city->country->name); ?>
+
+                                                </div> 
+                                                <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                                    <?php if($station->default != 1): ?>
+                                                    <form method="POST" action="<?php echo e(url('shop/station/makedefault')); ?>">
+
+                                                        <input type="hidden" value="<?php echo e($station->id); ?>" name="address" />
+                                                        <button data-toggle="tooltip" class="btn btn-primary" type="submit" title="Make Default Pickup Point">
+                                                            Make Default                                                
+                                                        </button>
+                                                    </form>
+                                                    <?php else: ?> 
+                                                    <span style="color: #F89530;font-weight: bold;">Default Pickup Point</span>
+                                                    <?php endif; ?>
+                                                </div>                
+                                            </div>
+
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.row -->
+                        </div>
+                        <!-- panel-body  -->
+
+                    </div><!-- row -->
+                </div>
+                <!-- checkout-step-01  -->
+
+            </div><!-- /.checkout-steps -->
+        </div>
+
+    </div><!-- /.row -->
+</div><!-- /.checkout-box -->
+
+</div><!-- /.container -->
+</div><!-- /.body-content -->
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('customer::layouts.checkout_master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

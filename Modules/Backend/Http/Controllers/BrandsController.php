@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use Intervention\Image\Facades\Image;
+
 class BrandsController extends Controller
 {
     /**
@@ -80,14 +81,23 @@ class BrandsController extends Controller
         {
     
 
-      $imagePath = $request->file('cover_photo')->store('public/brands');
-      $image = Image::make(Storage::get($imagePath))->resize(100,80)->encode();
-       Storage::put($imagePath,$image);
+      // $imagePath = $request->file('cover_photo')->store(public_path('brands'));
 
-          // dd($imagePath);
-       // $imagePath = explode('/',$imagePath);
 
-           $requestData['cover_photo'] = $imagePath;
+      // $image = Image::make(Storage::get($imagePath))->resize(100,80)->encode();
+      //  Storage::put($imagePath,$image);
+           $destinationPath = 'brands';
+
+           $file=$request->file('cover_photo');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['cover_photo'] = $destinationPath.'/'.$filename;
           
          //$requestData['cover_photo'] = Storage::disk('local')->putFile('brands', new  File($request->file('cover_photo')));
 
@@ -173,5 +183,14 @@ class BrandsController extends Controller
         Brand::destroy($id);
 
         return redirect('backend/brands')->with('flash_message', 'Brand deleted!');
+    }
+
+
+    public  function  remove_brand_pic($id)
+    {
+
+         $brand=Brand::find($id);
+        Storage::delete($brand->cover_photo);
+
     }
 }

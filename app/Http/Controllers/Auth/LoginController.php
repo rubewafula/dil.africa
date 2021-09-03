@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use  Auth;
+use Session;
 class LoginController extends Controller
 {
     /*
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,4 +38,69 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    protected  function  authenticated(Request $request, $user)
+    {
+
+      //  dd($user);
+
+        if($user->hasRole('admin'))
+        {
+
+            return redirect()->intended('backend');
+
+        }
+        if($user->hasRole('logistics'))
+        {
+            return redirect()->intended('logistics');
+        }
+         if($user->hasRole('seller'))
+         {      
+        
+            if($user->active < 1)
+            {
+                
+                Auth::logout();
+                Session::flash('alert-class','alert-danger');
+                Session::flash('flash_message','Your account has not  been  activated . Please  check  your  email  and click  on  the  activation  link');
+                return redirect('seller/login');
+
+            } else{
+
+               // dd("Here");
+             return redirect()->intended('seller');
+
+            }
+
+         }
+
+        if($user->hasRole('seller_care'))
+        {
+
+           return redirect()->intended('seller');
+
+        }
+        if($user->hasRole('qc'))
+        {
+
+           return redirect()->intended('qc');
+
+        }
+        if($user->is_customer == 1)
+        {
+            $cart = Session::get('cart');
+
+            if($cart != null) {
+
+                return redirect('/shop/checkout/delivery'); 
+            }else {
+
+                return redirect('/shop/history'); 
+            }
+        }
+
+    }
+
+
 }

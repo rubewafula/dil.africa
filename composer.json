@@ -6,17 +6,26 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "barryvdh/laravel-dompdf": "^0.8.2",
+        "cmgmyr/messenger": "^2.15",
         "doctrine/dbal": "^2.7",
-        "fideloper/proxy": "~3.3",
+        "fideloper/proxy": "~4.0",
+        "grafite/cms": "^3.1",
+        "inani/messager": "^1.0",
         "intervention/image": "^2.4",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.6.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "monolog/monolog": "^1.23",
         "nilsenj/toastr-laravel": "dev-1.0-stable",
         "nwidart/laravel-modules": "^2.7",
-        "watson/breadcrumbs": "^1.0",
-        "omnipay/paypal": "^2.6",
         "paypal/rest-api-sdk-php": "*",
+        "predis/predis": "^1.1",
+        "safaricom/mpesa": "^1.0",
         "srmklive/paypal": "~1.0",
+        "unisharp/laravel-ckeditor": "^4.7",
+        "unisharp/laravel-filemanager": "~1.8",
+        "watson/breadcrumbs": "^1.0",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
@@ -24,7 +33,7 @@
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~6.0",
+        "phpunit/phpunit": "~7.0",
         "symfony/thanks": "^1.0"
     },
     "autoload": {
@@ -34,7 +43,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "Modules/"
+            "Modules\\": "Modules/",
+            "Cms\\": "cms/"
 
         }
     },

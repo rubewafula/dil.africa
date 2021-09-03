@@ -8,8 +8,8 @@
         <div class="testimonials"><em>"</em> {{$t->message}} <em>"</em></div>
         <div class="clients_author">{{$t->name}}	
             <span>{{$t->organization}}</span>	
-        </div><!-- /.container-fluid -->
-    </div><!-- /.item -->
+        </div>
+    </div>
     @endforeach
 
-</div><!-- /.owl-carousel -->
+</div>

@@ -8,8 +8,8 @@
         <div class="testimonials"><em>"</em> <?php echo e($t->message); ?> <em>"</em></div>
         <div class="clients_author"><?php echo e($t->name); ?>	
             <span><?php echo e($t->organization); ?></span>	
-        </div><!-- /.container-fluid -->
-    </div><!-- /.item -->
+        </div>
+    </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-</div><!-- /.owl-carousel -->
+</div>

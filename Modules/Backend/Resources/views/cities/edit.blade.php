@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">Edit City #{{ $city->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/backend/cities') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/cities') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -23,12 +23,12 @@
 
                         {!! Form::model($city, [
                             'method' => 'PATCH',
-                            'url' => ['/backend/cities', $city->id],
+                            'url' => ['/admin/cities', $city->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('backend::cities.form', ['submitButtonText' => 'Update'])
+                        @include ('backend.cities.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

@@ -1,6 +1,16 @@
 @extends('backend::layouts.master')
 
 @section('content')
+
+<script type="text/javascript">
+    
+      $(document).ready(function(){
+
+        $('#depends_on').select2();
+        $('#level_two_category').select2();
+
+      });
+   </script>
                 <div class="page-breadcrumb" >
                    {{ Breadcrumbs::render() }}
 

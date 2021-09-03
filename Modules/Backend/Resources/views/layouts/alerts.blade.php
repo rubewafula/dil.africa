@@ -1,32 +1,31 @@
+     <?php  $user= App\User::find(Auth::user()->id); ?>
       <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-success pull-right">3</span></a>
+                                    <!-- <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="badge badge-success pull-right">
+                                        {{count($user->notifications)}}
+
+                                    </span></a> -->
                                     <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
-                                        <li><p class="drop-title">You have 3 pending tasks !</p></li>
+                                        <li><p class="drop-title">You have                                         {{count($user->notifications)}}
+ notifications !</p></li>
                                         <li class="dropdown-menu-list slimscroll tasks">
                                             <ul class="list-unstyled">
-                                                <li>
+
+                                                @foreach ($user->notifications as $notification) 
+ <li>
                                                     <a href="#">
                                                         <div class="task-icon badge badge-success"><i class="icon-user"></i></div>
-                                                        <span class="badge badge-roundless badge-default pull-right">1min ago</span>
-                                                        <p class="task-details">New user registered.</p>
+                                                        <span class="badge badge-roundless badge-default pull-right">{{$notification->created_at->DiffForHumans()}}</span>
+                                                        <p class="task-details">
+                                                        {{$notification->type}}</p>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <div class="task-icon badge badge-danger"><i class="icon-energy"></i></div>
-                                                        <span class="badge badge-roundless badge-default pull-right">24min ago</span>
-                                                        <p class="task-details">Database error.</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <div class="task-icon badge badge-info"><i class="icon-heart"></i></div>
-                                                        <span class="badge badge-roundless badge-default pull-right">1h ago</span>
-                                                        <p class="task-details">Reached 24k likes</p>
-                                                    </a>
-                                                </li>
+
+                                                @endforeach
+
+                                               
+                                              
                                             </ul>
                                         </li>
-                                        <li class="drop-all"><a href="#" class="text-center">All Tasks</a></li>
+                                       <!-- <li class="drop-all"><a href="#" class="text-center">All Tasks</a></li>-->
                                     </ul>
                                 </li>

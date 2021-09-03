@@ -4,6 +4,8 @@ namespace Modules\Customer\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Cache;
+
 class Hot_deal extends Model
 {
     /**
@@ -34,9 +36,20 @@ class Hot_deal extends Model
     }
     
     public function getHotDeals(){
+
+        if(Cache::has('hot_deals')) {
+
+            $deals = Cache::get('hot_deals');
+
+        }else{
         
-        $deals = $this->where("expires_on", ">", date("Y-m-d h:i:s"))
-                ->orderBy('id', 'DESC')->get();
+            $deals = $this->where("expires_on", ">", date("Y-m-d h:i:s"))
+                ->orderBy('priority')->get();
+
+            $minutes = 10;
+
+            Cache::add('hot_deals', $deals, $minutes);
+        }
         
         return $deals;
     }

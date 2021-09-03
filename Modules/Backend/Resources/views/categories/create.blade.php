@@ -1,6 +1,16 @@
 @extends('backend::layouts.master')
 
 @section('content')
+
+<script type="text/javascript">
+    
+      $(document).ready(function(){
+
+        $('#depends_on').select2();
+        $('#level_two_category').select2();
+
+      });
+   </script>
                 <div class="page-breadcrumb" >
                     {{ Breadcrumbs::render() }}
 
@@ -30,6 +40,7 @@
 
                         <form method="POST" action="{{ url('/backend/categories') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            <?php $category = new \App\Category; ?>
 
                             @include ('backend::categories.form')
 

@@ -10,8 +10,15 @@
         <div class="tab-content">
 
             <div id="description" class="tab-pane in active">
-                <div class="product-tab">
-                    <?php echo $product->product_description; ?>
+                <div class="product-tab" style="text-transform: initial;">
+                    <?php 
+
+                    $desc = $product->product_description; 
+
+                    $desc = preg_replace('/<img.*src=["\'](.*?)["\'].*(width=(\d+))?.*(height=(\d+))?.*\/>/', '<img src="$1" width="500"  />', $desc);
+
+                    ?>
+                    <?php echo $desc; ?>
 
                 </div>	
             </div><!-- /.tab-pane -->

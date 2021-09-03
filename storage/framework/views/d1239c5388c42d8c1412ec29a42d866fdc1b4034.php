@@ -5,5 +5,5 @@
         <?php ($tagname = \Modules\Customer\Entities\Tag::find($product_tag->tag_id)->name); ?>
         <a class="item" title="<?php echo e($tagname); ?>" href="products/tag/<?php echo e($product_tag->tag_id); ?>"><?php echo e($tagname); ?></a>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    </div><!-- /.tag-list -->
-</div><!-- /.sidebar-widget-body -->
+    </div>
+</div>

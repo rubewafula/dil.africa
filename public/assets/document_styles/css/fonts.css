@@ -1,0 +1,84 @@
+/* Extra-light */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-extralight-webfont.eot');
+    src: url('../fonts/terminaldosis-extralight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-extralight-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-extralight-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-extralight-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-extralight-webfont.svg#terminal_dosisextralight') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+/* Light */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-light-webfont.eot');
+    src: url('../fonts/terminaldosis-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-light-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-light-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-light-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-light-webfont.svg#terminal_dosislight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+/* Medium */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-medium-webfont.eot');
+    src: url('../fonts/terminaldosis-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-medium-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-medium-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-medium-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-medium-webfont.svg#terminal_dosismedium') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+/* Regular */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-regular-webfont.eot');
+    src: url('../fonts/terminaldosis-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-regular-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-regular-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-regular-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-regular-webfont.svg#terminal_dosisregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+/* Semi-bold */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-semibold-webfont.eot');
+    src: url('../fonts/terminaldosis-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-semibold-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-semibold-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-semibold-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-semibold-webfont.svg#terminal_dosissemibold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+/* Bold */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-bold-webfont.eot');
+    src: url('../fonts/terminaldosis-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-bold-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-bold-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-bold-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-bold-webfont.svg#terminal_dosisbold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+/* Extra bold */
+@font-face {
+    font-family: 'Terminal Dosis';
+    src: url('../fonts/terminaldosis-extrabold-webfont.eot');
+    src: url('../fonts/terminaldosis-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/terminaldosis-extrabold-webfont.woff2') format('woff2'),
+         url('../fonts/terminaldosis-extrabold-webfont.woff') format('woff'),
+         url('../fonts/terminaldosis-extrabold-webfont.ttf') format('truetype'),
+         url('../fonts/terminaldosis-extrabold-webfont.svg#terminal_dosisextrabold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}

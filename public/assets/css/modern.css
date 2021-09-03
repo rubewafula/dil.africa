@@ -4302,9 +4302,10 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
 /* Page Title */
 
 .page-title {
-    padding: 15px 20px;
+    padding: 5px 5px;
     border-bottom: 1px solid #e9e9e9;
 }
+
 
 .page-title h3 {
     font-size: 22px;

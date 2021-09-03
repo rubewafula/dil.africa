@@ -6,6 +6,19 @@
     </div>
 </div>
 
+@if(!empty($brand->cover_photo))
+
+<div  class="form-group">
+    
+    <label class="col-md-4 control-label"> Current  picture</label>
+        <div class="col-md-6">
+            <img src="{{asset($brand->cover_photo)}}" width="80px" /> <a href="{{  url('backend/remove_brand_pic/'.$brand->id)}}" onclick=" return  confirm('Are  you sure?')">Remove</a>
+</div>
+
+</div>
+
+@endif
+
 <div class="form-group {{ $errors->has('cover_photo') ? 'has-error' : ''}}">
     <label for="cover_photo" class="col-md-4 control-label">{{ 'Cover Photo' }}</label>
     <div class="col-md-6">

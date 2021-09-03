@@ -1,9 +1,11 @@
 <?php $__env->startSection('content'); ?>
-
+<?php ($category =  null); ?>
 <?php ($mini_category = $product->category); ?>
 <?php ($mini_category_name = $mini_category->name); ?>
 <?php ($sub_category = \Modules\Customer\Entities\Category::find($mini_category->depends_on)); ?>
+<?php if($sub_category != null): ?>
 <?php ($category = \Modules\Customer\Entities\Category::find($sub_category->depends_on)); ?>
+<?php endif; ?>
 
 <div class="breadcrumb" style="margin-bottom: 0px;">
     <div class="container">
@@ -11,13 +13,13 @@
             <ul class="list-inline list-unstyled">
                 <li><a href="<?php echo e(url('/shop')); ?>">Home</a></li>
                 <?php if($category != null): ?>
-                <li><a href="<?php echo e(url('shop/category/'.$category->id)); ?>"><?php echo e($category->name); ?></a></li>
+                <li><a href="<?php echo e(url('shop/category/'.$category->slug)); ?>"><?php echo e($category->name); ?></a></li>
                 <?php endif; ?>
                 <?php if($sub_category != null): ?>
-                <li><a href="<?php echo e(url('shop/category/'.$sub_category->id)); ?>"><?php echo e($sub_category->name); ?></a></li>
+                <li><a href="<?php echo e(url('shop/category/'.$sub_category->slug)); ?>"><?php echo e($sub_category->name); ?></a></li>
                 <?php endif; ?>
                 <?php if($mini_category != null): ?>
-                <li><a href="<?php echo e(url('shop/category/'.$mini_category->id)); ?>"><?php echo e($mini_category_name); ?></a></li>
+                <li><a href="<?php echo e(url('shop/category/'.$mini_category->slug)); ?>"><?php echo e($mini_category_name); ?></a></li>
                 <?php endif; ?>
                 <li class='active'><?php echo e($product->name); ?></li>
             </ul>
@@ -37,7 +39,8 @@
 
                 <!-- ============================================== Related PRODUCTS ============================================== -->
                 <section class="section featured-product wow fadeInUp">
-                    <h3 class="section-title">People Who Viewed This Item Also Viewed</h3>
+                    <h3 class="section-title hidden-xs hidden-sm">People Who Viewed This Item Also Viewed</h3>
+                    <h3 class="section-title hidden-md hidden-lg" style="font-size: 9px;">People Who Viewed This Item Also Viewed</h3>
                     <?php echo $__env->make('customer::product.related_products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 </section><!-- /.section -->
                 <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->

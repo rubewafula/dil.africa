@@ -5,8 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+require base_path('routes/cms.php');
+
 class RouteServiceProvider extends ServiceProvider
 {
+
+
     /**
      * This namespace is applied to your controller routes.
      *

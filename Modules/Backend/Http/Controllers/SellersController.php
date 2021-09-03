@@ -22,28 +22,11 @@ class SellersController extends Controller
 
         if (!empty($keyword)) {
             $sellers = Seller::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('username', 'LIKE', "%$keyword%")
                 ->orWhere('logo', 'LIKE', "%$keyword%")
+                ->orWhere('username', 'LIKE', "%$keyword%")
                 ->orWhere('description', 'LIKE', "%$keyword%")
                 ->orWhere('opening_hours', 'LIKE', "%$keyword%")
                 ->orWhere('closing_hours', 'LIKE', "%$keyword%")
-                ->orWhere('status', 'LIKE', "%$keyword%")
-                ->orWhere('country_id', 'LIKE', "%$keyword%")
-                ->orWhere('city_id', 'LIKE', "%$keyword%")
-                ->orWhere('area_id', 'LIKE', "%$keyword%")
-                ->orWhere('physical_location', 'LIKE', "%$keyword%")
-                ->orWhere('email_address', 'LIKE', "%$keyword%")
-                ->orWhere('telephone', 'LIKE', "%$keyword%")
-                ->orWhere('other_telephone', 'LIKE', "%$keyword%")
-                ->orWhere('contact_person', 'LIKE', "%$keyword%")
-                ->orWhere('contact_telephone', 'LIKE', "%$keyword%")
-                ->orWhere('contact_email_address', 'LIKE', "%$keyword%")
-                ->orWhere('warehouse_id', 'LIKE', "%$keyword%")
-                ->orWhere('bank_name', 'LIKE', "%$keyword%")
-                ->orWhere('account_name', 'LIKE', "%$keyword%")
-                ->orWhere('account_number', 'LIKE', "%$keyword%")
-                ->orWhere('swift_code', 'LIKE', "%$keyword%")
-                ->orWhere('bank_code', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $sellers = Seller::latest()->paginate($perPage);
@@ -71,12 +54,57 @@ class SellersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-			'name' => 'required'
-		]);
-        $requestData = $request->all();
+
+        $request->validate([
+            'name'=>'required',
+            'status'=>'required',
+            'country_id'=>'required',
+            'logo'=>'nullable|mimes:jpeg,png,bmp|max:2000',
+            'contact_person'=>'required',
+            'contact_telephone'=>'required',
+            'contact_email_address'=>'required|email',
+            'physical_location'=>'required',
+            'description'=>'required',
+            'city_id'=>'required',
+            'area_id'=>'required',
+            'email_address'=>'required',
+            'telephone'=>'required',
+
+       ]);
         
-        Seller::create($requestData);
+        $requestData = $request->all();
+
+          $slug= str_slug($request->name);
+
+          if(\App\Seller::where('username',$slug)->exists())
+         {
+
+            $slug= $slug.rand(100,600);
+         }
+
+
+      $requestData['username']=  $slug;
+
+       if($request->hasFile('logo'))
+        {
+
+        $destinationPath = 'logos';
+
+           $file=$request->file('logo');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['logo'] = $destinationPath.'/'.$filename;
+
+        }
+
+
+            Seller::create($requestData);
 
         return redirect('backend/sellers')->with('flash_message', 'Seller added!');
     }
@@ -119,16 +147,117 @@ class SellersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-			'name' => 'required'
-		]);
-        $requestData = $request->all();
+         $requestData = $request->all();
+
+        //  if($request->hasFile('logo'))
+        // {
+
+        // $destinationPath = 'logos';
+
+        //    $file=$request->file('logo');
+
+        //         $file_ext = str_replace('#', '', $file->getClientOriginalName());
+        //         $file_ext = str_replace(' ', '_', $file_ext);
+
+
+        //         $filename = time() . '-' . $file_ext;
+        //         $upload_success = $file->move($destinationPath, $filename);
+    
+        //    $requestData['logo'] = $destinationPath.'/'.$filename;
+
+        // }
+
+        $requestData = $this->seller_files($request,$requestData);
         
         $seller = Seller::findOrFail($id);
         $seller->update($requestData);
 
         return redirect('backend/sellers')->with('flash_message', 'Seller updated!');
     }
+
+
+
+      public function  seller_files($request,$requestData)
+  {
+        if($request->hasFile('logo'))
+        {
+
+
+         $destinationPath = 'logos';
+
+           $file=$request->file('logo');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['logo'] = $destinationPath.'/'.$filename;
+
+        }
+
+
+          if($request->hasFile('id_front'))
+        {
+
+
+        $destinationPath = 'uploads';
+
+           $file=$request->file('id_front');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['id_front'] = $destinationPath.'/'.$filename;
+
+        }
+
+
+          if($request->hasFile('id_back'))
+        {
+
+        $destinationPath = 'uploads';
+
+           $file=$request->file('id_back');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['id_back'] = $destinationPath.'/'.$filename;
+
+        }
+
+          if($request->hasFile('licence'))
+        {
+
+        $destinationPath = 'uploads';
+
+           $file=$request->file('licence');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['licence'] = $destinationPath.'/'.$filename;
+
+        }
+  
+     return  $requestData;
+
+  }
 
     /**
      * Remove the specified resource from storage.
@@ -143,4 +272,29 @@ class SellersController extends Controller
 
         return redirect('backend/sellers')->with('flash_message', 'Seller deleted!');
     }
+
+
+    public  function  manage($id)
+    {
+
+      $seller= Seller::findOrFail($id);
+      $title= 'Manage Seller '.$seller->name;
+
+
+      return  view('backend::sellers.manage_seller',compact('seller','title'));
+
+
+    }
+
+
+    public  function  new_user($seller_id)
+    {
+
+
+         return  view('backend::sellers.new_user',compact('seller_id'));
+
+    }
+
+
+
 }

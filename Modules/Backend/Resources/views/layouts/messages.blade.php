@@ -1,4 +1,4 @@
- <li class="dropdown">
+<!--  <li class="dropdown">
                                     <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown"><i class="fa fa-envelope"></i><span class="badge badge-success pull-right">4</span></a>
                                     <ul class="dropdown-menu title-caret dropdown-lg" role="menu">
                                         <li><p class="drop-title">You have 4 new  messages !</p></li>
@@ -56,4 +56,4 @@
                                         </li>
                                         <li class="drop-all"><a href="#" class="text-center">All Messages</a></li>
                                     </ul>
-                                </li>
+                                </li> -->

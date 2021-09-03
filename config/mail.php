@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'anjoroge@dil.africa'),
-        'name' => env('MAIL_FROM_NAME', 'DIL.Africa'),
+        'name' => env('MAIL_FROM_NAME', 'DIL.AFRICA'),
     ],
 
     /*

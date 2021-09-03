@@ -27,5 +27,19 @@ class Area extends Model
      */
     protected $fillable = ['name', 'zone_id', 'city_id'];
 
+    public  function  zone()
+    {
+
+        return  $this->BelongsTo('App\Zone');
+    }
+
+
+    public  function city()
+    {
+
+        return $this->BelongsTo('App\City');
+
+           }
+
     
 }

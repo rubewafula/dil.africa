@@ -4,6 +4,8 @@ namespace Modules\Customer\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Cache;
+
 class Popular extends Model
 {
     /**
@@ -40,8 +42,19 @@ class Popular extends Model
     
     //A Java Service will keep this populated and to a maximum of 20
     public function getPopular(){
+
+        if(Cache::has('popular_products')) {
+
+            $products = Cache::get('popular_products');
+
+        }else{
         
-        $products = $this->orderBy('id', 'DESC')->get();
+            $products = $this->orderBy('id', 'DESC')->limit(10)->get();
+
+            $minutes = 20;
+
+            Cache::add('popular_products', $products, $minutes);
+        }
         
         return $products;
     }

@@ -230,6 +230,13 @@ a {
 .single-product .product-info .price-container .price-box .price {
   color: #ff7800;
 }
+
+.product .product-info .product-price .price {
+  color: #0f7dc2;
+  font-weight: bold;
+  font-family: serif;
+}
+
 .single-product .product-info .quantity-container .cart-quantity .arrows .arrow:hover,
 .single-product .product-info .quantity-container .cart-quantity .arrows .arrow:focus {
   color: #0f7dc2;

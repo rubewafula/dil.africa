@@ -26,7 +26,8 @@ class Order_detail extends Model
      * @var array
      */
     protected $fillable = ['order_id', 'product_id', 'quantity', 'price',
-        'product_price_id', 'status'];
+         'flash_sale_price', 'product_price_id', 'status', 'delivery_status',
+          'return_comments'];
 
     public function product()
     {

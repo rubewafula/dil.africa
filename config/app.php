@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'DIL.Africa'),
+    'name' => env('APP_NAME', 'DIL.AFRICA'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:82/dil/public'),
+    'url' => env('APP_URL', 'http://dil.africa'),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,8 +165,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Watson\Breadcrumbs\ServiceProvider::class,
-
-
+        Unisharp\Ckeditor\ServiceProvider::class,
+		Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -181,8 +181,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        nilsenj\Toastr\ToastrServiceProvider::class
-
+        nilsenj\Toastr\ToastrServiceProvider::class,
+        \Safaricom\Mpesa\MpesaServiceProvider::class
 
 
     ],
@@ -237,9 +237,9 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Breadcrumbs' => Watson\Breadcrumbs\Facade::class,
-        'Toastr' => nilsenj\Toastr\Facades\Toastr::class
-
-
+		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Toastr' => nilsenj\Toastr\Facades\Toastr::class,
+        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class
 
     ],
 

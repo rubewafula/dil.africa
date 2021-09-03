@@ -55,13 +55,13 @@
                                         <thead style="background: #ffa200;color:#fff;opacity: 0.7">
                                             <tr>
                                                <tr>
-                                        <th>#</th><th>Category Id</th><th>Name</th><th>Slug</th><th>Actions</th>
+                                        <th>#</th><th></th><th>Category </th><th>Name</th><th>Actions</th>
                                     </tr>
                                             </tr>
                                         </thead>
                                         <tfoot style="background: #000;color:#fff;opacity: 0.7">
                                             <tr>
-                                                      <th>#</th><th>Category Id</th><th>Name</th><th>Slug</th><th>Actions</th>
+                                                      <th>#</th><th></th><th>Category </th><th>Name</th><th>Actions</th>
 
                                             </tr>
                                         </tfoot>
@@ -69,7 +69,26 @@
                                             @foreach($sub_categories as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->category_id }}</td><td>{{ $item->name }}</td><td>{{ $item->slug }}</td>
+                                        <td>  
+
+                                         @if(!empty($item->cover_photo))
+                            
+                                            <img src="{{asset($item->cover_photo)}}" width="300px" />
+                                        @endif
+
+                                        </td>
+
+                                        <td>
+
+                                            @if(App\Category::where('id',$item->category_id)->exists())
+
+                                            {{ $item->category->name }}
+
+                                            @endif
+
+                                        </td>
+
+                                        <td>{{ $item->name }}</td>
                                         <td>
                                             
                                             <a href="{{ url('/backend/sub_categories/' . $item->id . '/edit') }}" title="Edit Sub_category"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

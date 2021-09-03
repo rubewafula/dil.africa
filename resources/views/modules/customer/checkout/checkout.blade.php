@@ -1,4 +1,4 @@
-@extends('customer::layouts.master')
+@extends('customer::layouts.checkout_master')
 
 @section('content')
 
@@ -41,7 +41,7 @@
                             </div>
                             <!-- panel-heading -->
 
-                            <div id="collapseOne" class="panel-collapse collapse in">
+                            <div id="collapseOne1" class="panel-collapse collapse in">
 
                                 <!-- panel-body  -->
                                 <div class="panel-body" id="login-form">
@@ -49,17 +49,17 @@
 
                                         <!-- guest-login -->			
                                         <div class="col-md-6 col-sm-6 guest-login">
-                                            <h4 class="checkout-subtitle">Guest or Register Login</h4>
+                                            <h4 class="checkout-subtitle"> Create an Account</h4>
                                             <p class="text title-tag-line">Register with us for future convenience:</p>
 
                                             <!-- radio-form  -->
                                             <form class="register-form" role="form">
                                                 <div class="radio radio-checkout-unicase">  
-                                                    <input id="guest" type="radio" name="checkout_option" value="guest" class="choose-option" checked>  
-                                                    <label class="radio-button guest-check" for="guest">Checkout as Guest</label>  
+                                                    <input id="register" type="radio" name="checkout_option" class="choose-option" value="register" checked>  
+                                                    <label class="radio-button" for="register">Register</label>
                                                     <br>
-                                                    <input id="register" type="radio" name="checkout_option" class="choose-option" value="register">  
-                                                    <label class="radio-button" for="register">Register</label>  
+                                                    <input id="guest" type="radio" name="checkout_option" value="guest" class="choose-option">  
+                                                    <label class="radio-button guest-check" for="guest">Checkout as Guest</label>  
                                                 </div>  
                                             </form>
                                             <!-- radio-form  -->
@@ -72,7 +72,7 @@
                                                 <li>- Easy access to your order history and status</li>
                                             </ul>
 
-                                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button checkout-continue" id="checkout_continue">Continue</button>
+                                            <button type="submit" class="btn-upper btn btn-warning checkout-page-button checkout-continue" id="checkout_continue">Continue</button>
                                         </div>
                                         <!-- guest-login -->
 

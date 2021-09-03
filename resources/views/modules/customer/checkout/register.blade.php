@@ -1,4 +1,4 @@
-@extends('customer::layouts.master')
+@extends('customer::layouts.checkout_master')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
 $(document).ready(function(){
     
-    var BASE_URL = "http://localhost:82/dil/public/shop/";
+    var BASE_URL = "{{url('/shop/')}}";
     
     $("#country").change(function(){
         

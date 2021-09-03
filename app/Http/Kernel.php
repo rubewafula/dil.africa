@@ -19,7 +19,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        \Illuminate\Session\Middleware\StartSession::class,
     ];
 
     /**
@@ -32,9 +31,9 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-             \Illuminate\Session\Middleware\AuthenticateSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-//            \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -61,5 +60,18 @@ class Kernel extends HttpKernel
          'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
          'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
          'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
+         'backend'=>\App\Http\Middleware\Backend::class,
+         'seller'=>\App\Http\Middleware\Seller::class,
+         'cms' => \App\Http\Middleware\GrafiteCms::class,
+         'cms-api' => \App\Http\Middleware\GrafiteCmsApi::class,
+         'cms-language' => \App\Http\Middleware\GrafiteCmsLanguage::class,
+         'cms-analytics' => \Grafite\Cms\Middleware\GrafiteCmsAnalytics::class,
+         'marketer'=>\App\Http\Middleware\Marketer::class,
+         'accounts'=>\App\Http\Middleware\Accounts::class,
+        'qc'=>\App\Http\Middleware\QualityControl::class,
+
+
+
+
     ];
 }

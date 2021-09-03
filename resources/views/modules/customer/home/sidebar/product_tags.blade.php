@@ -5,5 +5,5 @@
         @php($tagname = \Modules\Customer\Entities\Tag::find($product_tag->tag_id)->name)
         <a class="item" title="{{$tagname}}" href="products/tag/{{$product_tag->tag_id}}">{{$tagname}}</a>
         @endforeach
-    </div><!-- /.tag-list -->
-</div><!-- /.sidebar-widget-body -->
+    </div>
+</div>

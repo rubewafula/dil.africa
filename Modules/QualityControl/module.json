@@ -1,0 +1,16 @@
+{
+    "name": "QualityControl",
+    "alias": "qc",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\QualityControl\\Providers\\QualityControlProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Backend\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;

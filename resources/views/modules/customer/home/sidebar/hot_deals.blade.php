@@ -11,7 +11,9 @@
         <div class="products">
             <div class="hot-deal-wrapper">
                 <div class="image">
-                    <img src="assets/images/products/{{$deal->product->getDefaultImage()->image_url}}" alt="">
+                    <a href="{{url('shop/product/detail/'.$deal->product->slug)}}">
+                        <img src="assets/images/products/{{$deal->product->getDefaultImage()->image_url}}" alt="">
+                    </a>
                 </div>
                 <div class="sale-offer-tag"><span>{{$deal->discount}}%<br>off</span></div>
                 @php($expires_on = strtotime($deal->expires_on))
@@ -58,29 +60,30 @@
             </div><!-- /.hot-deal-wrapper -->
 
             <div class="product-info text-left m-t-20">
-                <h3 class="name"><a href="{{url('shop/product/detail/'.$deal->product_id)}}">{{$deal->product->name}} </a></h3>
+                <h3 class="name"><a href="{{url('shop/product/detail/'.$deal->product->slug)}}">{{$deal->product->name}} </a></h3>
                 <div class="rating rateit-small"></div>
 
                 <div class="product-price">	
                     <span class="price">
-                        {{$deal->offer_price}}
+                      KShs  {{ number_format($deal->offer_price) }}
                     </span>
 
-                    <span class="price-before-discount">{{$deal->price_before}}</span>					
+                    <span class="price-before-discount">{{ number_format($deal->price_before) }}</span>					
 
                 </div><!-- /.product-price -->
 
             </div><!-- /.product-info -->
             @php($productPrice = $deal->product->getActivePrice())
 
+            @if(count($productPrice) == 1 || !$deal->product->hasDifferentPrices())
             <div class="cart clearfix animate-effect">
                 <div class="action">
 
                     <div class="add-cart-button btn-group">
                         <form method="POST" action="{{url('shop/add_to_cart')}}">
-                            <input type="hidden" value="{{$productPrice->id}}" name="product_ref" />
+                            <input type="hidden" value="{{$productPrice->first()->id}}" name="product_ref" />
                             <input type="hidden" value="1" name="quantity" />
-                            <button data-toggle="tooltip" class="btn btn-primary icon addtocart" type="submit" product_ref="{{$productPrice->id}}" title="Add Cart">
+                            <button data-toggle="tooltip" class="btn btn-primary icon addtocart" type="submit" product_ref="{{$productPrice->first()->id}}" title="Add Cart">
                                 <i class="fa fa-shopping-cart"></i>													
                             </button>
                             <button class="btn btn-primary cart-btn" type="submit">Add to cart</button>
@@ -90,6 +93,7 @@
 
                 </div><!-- /.action -->
             </div><!-- /.cart -->
+            @endif
         </div>	
     </div>
     @endforeach

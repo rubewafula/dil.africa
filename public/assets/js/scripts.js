@@ -289,26 +289,6 @@ $(document).ready(function(){
     $('.rating').rateit({max: 5, step: 1, value : 4, resetable : false , readonly : true});
 });
 
-/*===================================================================================*/
-/* PRICE SLIDER
-/*===================================================================================*/
-$(document).ready(function () {
-
-// Price Slider
-if ($('.price-slider').length > 0) {
-    $('.price-slider').slider({
-        min: 100,
-        max: 700,
-        step: 10,
-        value: [200, 500],
-        handle: "square"
-
-    });
-
-}
-
-});
-
 
 /*===================================================================================*/
 /* SINGLE PRODUCT GALLERY

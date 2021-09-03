@@ -25,7 +25,37 @@ class Seller extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'username', 'logo', 'description', 'opening_hours', 'closing_hours', 'status', 'country_id', 'city_id', 'area_id', 'physical_location', 'email_address', 'telephone', 'other_telephone', 'contact_person', 'contact_telephone', 'contact_email_address', 'warehouse_id', 'bank_name', 'account_name', 'account_number', 'swift_code', 'bank_code'];
+      protected $guarded = ['id','seller_id'];
+
+      
+        public function  category()
+        {
+
+        	return  $this->BelongsTo('App\Category');
+        }
+
+        
+
+      public  function  orders()
+      {
+
+        return  $this->hasMany('App\Seller_order')->OrderBy('id','DESC');
+      }
+
+
+
+      public  function  products()
+      {
+
+      	return  $this->hasMany('App\Product');
+      }
+
+
+      public   function  users()
+      {
+
+        return  $this->HasMany('App\User');
+      }
 
     
 }

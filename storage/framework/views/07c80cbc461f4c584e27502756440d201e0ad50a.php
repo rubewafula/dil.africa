@@ -2,12 +2,33 @@
 
     <?php ($banner = new \Modules\Customer\Entities\Promotion_banner()); ?>
     <?php ($middle_banner = $banner->getMiddleBanner_1()); ?>
-    
+ 
+    <?php if($middle_banner != null): ?>
     <div class="col-md-12">
         <div class="wide-banner cnt-strip">
             <div class="image">
-                <img class="img-responsive" src="assets/images/banners/<?php echo e($middle_banner->url); ?>" alt="">
-            </div>	
+                <?php if($middle_banner->target_url != null): ?>
+                <a href="<?php echo e(url('/'.$middle_banner->target_url)); ?>" target="_blank">
+                    <img class="img-responsive" src="assets/images/banners/<?php echo e($middle_banner->url); ?>" alt="">
+                </a>
+                <?php elseif($middle_banner->campaign_id != null): ?>
+                <a href="<?php echo e(url('/shop/campaign/'.$middle_banner->campaign_id)); ?>">
+                    <img class="img-responsive" src="assets/images/banners/<?php echo e($middle_banner->url); ?>" alt="">
+                </a>
+                <?php elseif($middle_banner->product_id != null): ?>
+                <?php ($slug = \Modules\Customer\Entities\Product::find($middle_banner->product_id)->slug); ?>
+                <a href="<?php echo e(url('/shop/product/detail/'.$slug)); ?>">
+                    <img class="img-responsive" src="assets/images/banners/<?php echo e($middle_banner->url); ?>" alt="">
+                </a>
+                <?php elseif($middle_banner->category_id != null): ?>
+                <?php ($slug = \Modules\Customer\Entities\Category::find($middle_banner->category_id)->slug); ?>
+                <a href="<?php echo e(url('/shop/category/'.$slug)); ?>">
+                    <img class="img-responsive" src="assets/images/banners/<?php echo e($middle_banner->url); ?>" alt="">
+                </a>
+                 <?php else: ?>
+                 <img class="img-responsive" src="assets/images/banners/<?php echo e($middle_banner->url); ?>" alt="">
+                 <?php endif; ?>
+            </div>
             <div class="strip strip-text">
                 <div class="strip-inner">
                     <h2 class="text-right">
@@ -16,8 +37,9 @@
             </div>
             <div class="new-label">
                 <div class="text"></div>
-            </div><!-- /.new-label -->
-        </div><!-- /.wide-banner -->
+            </div>
+        </div>
     </div><!-- /.col -->
+    <?php endif; ?>
 
 </div><!-- /.row -->

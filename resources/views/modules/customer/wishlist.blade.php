@@ -38,56 +38,70 @@
                                         </div>
                                     </div>
 
-                                    <table id="wishlist_table" class="table table-striped table-bordered" style="width:100%;">
-                                        <thead>
-                                            <tr style="background:#fff;color:#337AB7;">
-                                                <th>Date</th>
-                                                <th>Product Name</th>
-                                                <th>Color</th>
-                                                <th>Size</th>
-                                                <th>Category</th>
-                                                <th style="background: #FFA200;border: 1px solid #FFA200;color: #FFF;">Add to Cart</th>
-                                            </tr>
-                                        </thead>
+                                    <style> 
+                                        .col-padding{
+                                            padding:  5px 15px;
+                                        }
+                                    </style>
 
-                                        <tbody>
-                                            @foreach($wishlists as $wishlist)
+                                    <div id="wishlist_table" class="row hidden-xs" style="background:#ddd;color:#337AB7;padding: 10px 0px;font-weight: bold;">
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Date</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Product Name</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Color</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Size</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Category</div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">Add to Cart</div>                    
+                                    </div>
 
-                                            <tr>
-                                                <td>{{$wishlist->created_at}}</td>
-                                                <td>{{$wishlist->product->name}}</td>
-                                                <td>{{$wishlist->product_price->color}}</td>
-                                                <td>{{$wishlist->product_price->size}}</td>
-                                                <td>{{$wishlist->product->category->name}}</td>
-                                                <td>
-                                                    <form method="POST" action="{{url('shop/add_to_cart')}}">
-                                                        <div class="row">
-
-
-                                                        <div class="col-sm-4">
-                                                            <div>
-                                                                <div class="quant-input">                                       
-                                                                    <input type="number" step="1" name="quantity" placeholder="Qty" value="1" style="width:38px;">
-                                                                </div>
+                                    @foreach($wishlists as $wishlist)
+                                    @if($wishlist->product != null)
+                                    <div class="row" style="background:#fff;padding: 10px 0px;border-bottom: 1px solid #ddd;">
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Date: </span>{{$wishlist->created_at}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Product Name: </span>{{$wishlist->product->name}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Color: </span> {{$wishlist->product_price->color}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Size: </span> {{$wishlist->product_price->size}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            <span class="hidden-lg hidden-md blue-text"> Category: </span> {{$wishlist->product->category->name}}
+                                        </div>
+                                        <div class="col-md-2 col-xs-12 col-sm-12 col-padding">
+                                            
+                                            <form method="POST" action="{{url('shop/add_to_cart')}}">
+                                                <div class="row">
+                                                    <div class="col-xs-4 hidden-lg hidden-md">
+                                                        <span class="blue-text"> Add to Cart: </span>
+                                                    </div>
+                                                    <div class="col-sm-4 col-xs-1">
+                                                        <div>
+                                                            <div class="quant-input">                                       
+                                                                <input type="number" step="1" name="quantity" placeholder="Qty" value="1" style="width:38px;">
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="col-sm-4" style="margin-left: 10px;">
+                                                    <div class="col-sm-4 col-xs-2" style="margin-left: 10px;">
 
-                                                            <input type="hidden" value="{{$wishlist->product_price->id}}" name="product_ref" />
-                                                            <button data-toggle="tooltip" class="btn btn-primary icon addtocart" style="height: 24px;padding: 0px 10px;" type="submit" title="Add Item to Cart">
-                                                                <i class="fa fa-shopping-cart"></i>													
-                                                            </button>
+                                                        <input type="hidden" value="{{$wishlist->product_price->id}}" name="product_ref" />
+                                                        <button data-toggle="tooltip" class="btn btn-primary icon addtocart" style="height: 24px;padding: 0px 10px;" type="submit" title="Add Item to Cart">
+                                                            <i class="fa fa-shopping-cart"></i>                                                 
+                                                        </button>
 
-                                                        </div>
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                            </tr>						
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>  
+                                                    
+                                    </div>
+                                     @endif  
 
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                    @endforeach
 
                                 </div>
                             </div>

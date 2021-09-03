@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 
 use App\Sub_category;
 use Illuminate\Http\Request;
+use Session;
+use Storage;
+use File;
 
 class Sub_categoriesController extends Controller
 {
@@ -23,9 +26,6 @@ class Sub_categoriesController extends Controller
         if (!empty($keyword)) {
             $sub_categories = Sub_category::where('category_id', 'LIKE', "%$keyword%")
                 ->orWhere('name', 'LIKE', "%$keyword%")
-                ->orWhere('slug', 'LIKE', "%$keyword%")
-                ->orWhere('cover_photo', 'LIKE', "%$keyword%")
-                ->orWhere('description', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $sub_categories = Sub_category::latest()->paginate($perPage);
@@ -58,6 +58,19 @@ class Sub_categoriesController extends Controller
 			'cover_photo' => 'required'
 		]);
         $requestData = $request->all();
+
+          $destinationPath = 'subs';
+
+           $file=$request->file('cover_photo');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['cover_photo'] = $destinationPath.'/'.$filename;
         
         Sub_category::create($requestData);
 
@@ -104,11 +117,30 @@ class Sub_categoriesController extends Controller
     {
         $this->validate($request, [
 			'name' => 'required',
-			'cover_photo' => 'required'
+			//'cover_photo' => 'required'
 		]);
         $requestData = $request->all();
         
         $sub_category = Sub_category::findOrFail($id);
+
+
+  if($request->has('cover_photo'))
+  {
+       $destinationPath = 'subs';
+
+           $file=$request->file('cover_photo');
+
+                $file_ext = str_replace('#', '', $file->getClientOriginalName());
+                $file_ext = str_replace(' ', '_', $file_ext);
+
+
+                $filename = time() . '-' . $file_ext;
+                $upload_success = $file->move($destinationPath, $filename);
+    
+           $requestData['cover_photo'] = $destinationPath.'/'.$filename;
+  }
+          
+
         $sub_category->update($requestData);
 
         return redirect('backend/sub_categories')->with('flash_message', 'Sub_category updated!');
@@ -126,5 +158,25 @@ class Sub_categoriesController extends Controller
         Sub_category::destroy($id);
 
         return redirect('backend/sub_categories')->with('flash_message', 'Sub_category deleted!');
+    }
+
+
+    public function  remove_subcategory_pic($id)
+    {
+
+         $brand=Sub_category::find($id);
+
+     
+        if (File::exists(public_path($brand->cover_photo))) {
+         unlink(public_path($brand->cover_photo));
+}
+         $brand->cover_photo='';
+         $brand->save();
+
+       Session::flash('flash_message','done');
+
+    return  redirect()->back();
+
+
     }
 }

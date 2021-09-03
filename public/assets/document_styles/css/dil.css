@@ -1,0 +1,829 @@
+.myhai-brand {
+	background-image: url(../images/logo.png);
+	background-repeat: no-repeat;
+	background-position: 0;
+	width: 141px;
+	height: 60px;
+	line-height: 60px;
+	padding: 0;
+	text-indent: -99em;
+	overflow: hidden;
+	margin: 10px 10px 10px 0;
+}
+
+.container-signin {
+	margin-top: 140px;
+	margin-bottom: 40px;
+}
+
+.form-box {
+	margin: auto;
+	max-width: 400px;
+	background-color: #FFF;
+	padding: 20px;
+}
+.form-box .logo {
+	margin: 0 0 20px;
+}
+
+.section {
+	margin-top: 30px;
+}
+
+.ad-space .advert {
+	background-color: #FFF;
+	height: 120px;
+	line-height: 120px;
+	text-align: center;
+}
+.ad-space .advert.advert-fake {
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+
+.widget {
+	background-color: #FFF;
+	margin-bottom: 30px;
+    position: relative;
+}
+.widget .widget-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    background-image: url(/images/indicator_B0B0B0_FFFFFF.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+.widget .widget-header,
+.widget .widget-body,
+.widget .widget-footer {
+	overflow: hidden;
+}
+.widget .widget-header {
+	color: #FFF;
+  background-color: #ffa200;
+}
+.widget.widget-theme-blue .widget-header {
+	background-color: #0098DB;
+}
+.widget .widget-header .widget-action {
+	display: inline-block;
+	color: #FFF;
+	font-size: 16px;
+	line-height: 24px;
+    background-color: #ffa200;
+}
+.widget.widget-theme-blue .widget-header .widget-action {
+	background-color: #0098DB;
+}
+.widget .widget-header .widget-action:hover {
+    background-color: #9e0057;
+	text-decoration: none;
+}
+.widget.widget-theme-blue .widget-header .widget-action {
+	background-color: #006E9F;
+}
+.widget .widget-header .pull-left .widget-action {
+	border-right: 1px solid #FFF;
+	margin-right: 10px;
+	padding: 10px 15px 10px 10px;
+}
+.widget .widget-header .pull-left .widget-action .glyphicon {
+	margin-right: 3px;
+}
+.widget .widget-header .pull-right .widget-action {
+	border-left: 1px solid #FFF;
+	margin-left: 10px;
+	padding: 10px 15px;
+}
+.widget .widget-header .pull-right .widget-action .glyphicon {
+	margin-right: 3px;
+}
+.widget .widget-header .widget-action:hover .widget-action-label {
+	text-decoration: underline;
+}
+.widget .widget-header .widget-title {
+	margin: 0;
+	padding: 0;
+	font-size: 24px;
+	line-height: 24px;
+	padding: 10px;
+}
+.widget .widget-body h4 {
+	padding: 8px 10px;
+	margin: 10px 0;
+	border-bottom: 2px solid #DDD;
+	font-size: 14px;
+	font-weight: bold;
+}
+.widget .widget-body p {
+	margin: 10px;
+}
+.widget .widget-body form {
+	margin: 10px;
+	overflow: hidden;
+}
+.widget .widget-body .nav {
+	padding: 10px 10px 0 10px;
+}
+.widget .widget-body .form-buttons {
+	text-align: right;
+}
+.widget .widget-footer {
+	border-top: 1px solid #F0F0F0;
+	padding: 10px;
+}
+
+.bill-list {
+	list-style: none;
+	padding: 0;
+	margin: 10px;
+}
+.bill-list li {
+	border-top: 1px solid #ffa200;
+	padding: 10px;
+	overflow: hidden;
+}
+.bill-list li:first-child {
+	border-top: 0;
+}
+.bill-list .pull-left {
+	margin-right: 20px;
+}
+.bill-list .bill-title {
+	font-weight: bold;
+}
+.bill-list .bill-date {
+	color: #ffa200;
+}
+.bill-list .bill-actions {
+	margin-top: 6px;
+}
+
+.calendar {
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #ffa200;
+	color: #FFF;
+	padding: 2px;
+	text-align: center;
+	width: 50px;
+}
+.calendar .day,
+.calendar .month {
+	display: block;
+}
+.calendar .day {
+	background-color: #FFF;
+	color: #000;
+	font-size: 26px;
+	padding: 4px 0;
+}
+.calendar .month {
+	font-weight: bold;
+	font-size: 16px;
+	padding: 2px 0;
+}
+
+.button-toolbar {
+	overflow: hidden;
+	margin: 15px 0;
+}
+.button-toolbar.bill-toolbar {
+	width: 960px;
+	margin: 15px auto;
+}
+
+.bill-view {
+	margin: 15px auto;
+	width: 960px;
+	background-color: #FFF;
+	border: 1px solid #C5C5C5;
+}
+.bill-view .bill-header {
+	overflow: hidden;
+	margin: 20px;
+}
+.bill-view .bill-header .bill-logo {
+	float: left;
+}
+.bill-view .bill-header .bill-overview {
+	float: right;
+}
+.bill-view .bill-header .bill-header-left {
+    width: 162px;
+    vertical-align: top;
+}
+.bill-view .bill-header .bill-header-details {
+    vertical-align: top;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.bill-view .bill-header .bill-header-details p,
+.bill-view .bill-header .bill-header-details p.lead {
+    margin-bottom: 2px;
+}
+.bill-view .bill-header .bill-header-right {
+    vertical-align: top;
+    width: 190px;
+}
+
+.bill-view .bill-details {
+	margin: 20px;
+}
+.bill-view .bill-invoice {
+	margin: 20px;
+}
+
+.bill-view .bill-account-details {
+    margin-top: 20px;
+}
+.bill-view .bill-account-details td,
+.bill-view .bill-account-details th {
+    width: 16.6%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.bill-view .data-table th,
+.bill-view .data-table td {
+	margin: 0;
+	padding: 0 5px;
+	vertical-align: top;
+}
+.bill-view .data-table th {
+	color: #3498db;
+
+
+}
+.bill-view .data-table td {
+	color: #000000;
+}
+.bill-view .data-table.center-align {
+	margin-left: auto;
+	margin-right: auto;
+}
+.bill-view .data-table.text-large {
+	font-size: 17px;
+}
+.bill-view .data-table.text-large td {
+	padding: 2px 8px;
+}
+.bill-view .data-table.values-right td {
+	text-align: right;
+}
+
+.bill-view .invoice-table thead th {
+	font-weight: bold;
+	color: #ffa200;
+}
+.bill-view .invoice-table td.type-numeric {
+	text-align: right;
+}
+.bill-view .invoice-table tfoot th,
+.bill-view .invoice-table tfoot td {
+	border-top-color: #FFF;
+}
+.bill-view .invoice-table tfoot tr:first-child th,
+.bill-view .invoice-table tfoot tr:first-child td {
+	border-top-color: #DDD;
+}
+.bill-view .invoice-table tfoot th {
+	text-align: right;
+}
+.bill-view .invoice-table tfoot td {
+	background-color: #F0F0F0;
+}
+
+.bill-view .bill-footer {
+	margin: 20px;
+	text-align: left;
+}
+.bill-view .bill-footer code {
+    background-color: transparent;
+}
+
+.notification-section .alert {
+	margin-bottom: 0;
+}
+
+.embed-payment {
+	width: 100%;
+	height: 600px;
+	border: 0;
+}
+
+.section-package-select .switch-package-compare {
+	overflow: hidden;
+}
+.section-package-select .col-current-package {
+	padding-bottom: 1000px;
+	margin-bottom: -1000px;
+}
+.section-package-select .col-current-package .package {
+	background-color: #0098DB;
+}
+.section-package-select .switch-map-container {
+    overflow: hidden;
+}
+.section-package-select .col-map-search {
+	background-color: #0098db;
+    color: #FFFFFF;
+	padding-bottom: 1000px;
+	margin-bottom: -1000px;
+}
+.section-package-select .col-map .map-frame {
+    height: 460px;
+    margin: 0 -15px;
+}
+
+.switch-package-compare .package {
+	text-align: center;
+	padding: 10px;
+	margin-bottom: 15px;
+	color: #FFF;
+}
+.switch-package-compare .package .package-name {
+	color: #FFF;
+	font-size: 18px;
+	font-weight: bold;
+}
+.switch-package-compare .package .package-tagline {
+	font-size: 16px;
+}
+.switch-package-compare .package .package-features {
+	margin: 10px 0;
+	padding-left: 20px;
+	text-align: left;
+}
+.switch-package-compare .package .package-price {
+	font-size: 17px;
+	font-weight: bold;
+}
+.switch-package-compare .package .package-price-diff {
+	font-size: 13px;
+}
+.switch-package-compare .package .package-select {
+	margin-top: 10px;
+}
+
+.switch-package-compare .package.switch-type-upgrade {
+	background-color: #ffa200;
+	color: #FFF;
+}
+.switch-package-compare .package.switch-type-downgrade {
+	background-color: #0098DB;
+	color: #FFF;
+}
+.switch-package-compare .package.switch-type-downgrade .package-name,
+.switch-package-compare .package.switch-type-upgrade .package-name {
+	color: #FFF;
+}
+
+#modalSpeedTest .modal-content {
+	background-color: #58ACFA;
+}
+#modalSpeedTest .modal-content .modal-header {
+	background-color: transparent;
+	box-shadow: none;
+}
+
+.advanced-details {
+	padding: 0 20px;
+}
+.advanced-details .table tr th {
+	width: 120px;
+}
+
+
+.mpesa-steps {
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.mpesa-steps h3 {
+	margin-top: 0;
+}
+.mpesa-steps ul {
+	list-style: none;
+	padding-left: 0;
+}
+.mpesa-steps ul li {
+	position: relative;
+	padding-left: 22px;
+}
+.mpesa-steps ul li .glyphicon,
+.mpesa-steps ul li .mpesa-progress-status {
+	position: absolute;
+	top: 2px;
+	left: 1px;
+}
+.mpesa-steps ul li .mpesa-progress-status img {
+	vertical-align: top;
+}
+
+.myhai-mpesa {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.prize-list {
+    overflow: auto;
+}
+.prize-opt {
+    display: block;
+    background-color: #F0F0F0;
+    color: #747474;
+    font-weight: normal;
+    overflow: hidden;
+}
+.prize-opt .prize-input {
+    float: left;
+    width: 35px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 100px;
+    margin-bottom: -100px;
+    background-color: #D8D8D8;
+}
+.prize-opt .prize-description {
+    padding: 5px;
+    margin-left: 40px;
+}
+.prize-opt .prize-description .prize-name {
+    font-weight: bold;
+}
+.prize-opt.selected {
+    background-color: #ffa200;
+    color: #FFFFFF;
+}
+.prize-opt.selected .prize-input {
+    background-color: #A8005D;
+}
+
+.pac-container {
+    z-index: 5000;
+}
+
+.section-type-select .container {
+    margin-bottom: 15px;
+}
+
+.big-opt {
+    position: relative;
+    display: block;
+    text-align: center;
+    background-color: #FFFFFF;
+    padding: 30px;
+}
+@media (min-width: 768px) {
+    .big-opt {
+        padding: 60px 40px;
+    }
+}
+.big-opt:focus {
+    text-decoration: underline;
+}
+.big-opt.selected {
+    background-color: #A8005D;
+    color: #FFFFFF;
+}
+.big-opt .big-opt-icon {
+    font-size: 50px;
+}
+.big-opt .big-opt-label {
+    font-size: 30px;
+}
+.big-opt .big-opt-selected {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border: 2px solid #000000;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    line-height: 21px;
+}
+.big-opt.selected .big-opt-selected {
+    border-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.big-opt .big-opt-selected .glyphicon {
+    visibility: hidden;
+}
+.big-opt.selected .big-opt-selected .glyphicon,
+.big-opt:hover .big-opt-selected .glyphicon {
+    visibility: visible;
+}
+.big-opt:hover .big-opt-selected {
+    border-color: #A8005D;
+}
+.big-opt.selected:hover .big-opt-selected {
+    border-color: #FFFFFF;
+}
+.big-opt:hover .big-opt-selected .glyphicon {
+    opacity: 0.5;
+    color: #A8005D;
+}
+.big-opt.selected:hover .big-opt-selected .glyphicon {
+    opacity: 1;
+    color: #FFFFFF;
+}
+.big-opt .big-opt-check {
+    display: none;
+}
+@media (min-width: 768px) {
+    .big-opt .big-opt-selected {
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        line-height: 30px;
+    }
+}
+
+.type-select-header {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.action-toolbar {
+    background-color: #FFFFFF;    
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.section-package-select h3 {
+    margin-top: 0;
+}
+
+.hai-wallet {
+    border: 1px solid #ffa200;
+    margin: 10px;
+}
+.hai-wallet .hai-wallet-info {
+    line-height: 28px;
+    padding: 10px;
+}
+.hai-wallet .hai-wallet-info .hai-wallet-balance {
+    color: #ffa200;
+    font-weight: bold;
+}
+.hai-wallet .hai-wallet-explained {
+    padding: 10px;
+    border-top: 1px solid #F0F0F0;
+}
+.hai-wallet .hai-wallet-explained p {
+    margin: 0;
+}
+
+.connection-health {
+    margin: 10px;
+}
+.health-bars {
+    overflow: hidden;
+    line-height: 40px;
+    height: 40px;
+}
+.health-bars .health-explaination {
+    float: left;
+    margin-right: 10px;
+}
+.health-bars .health-bar {
+    float: left;
+    margin-right: 2px;
+    width: 10px;
+    vertical-align: bottom;
+    background-color: #DDD;
+}
+.health-bars .health-bar:last-child {
+    margin-right: 0;
+}
+.health-bars .health-bar.bar-1 {
+    height: 10px;
+    margin-top: 30px;
+}
+.health-bars .health-bar.bar-2 {
+    height: 20px;
+    margin-top: 20px;
+}
+.health-bars .health-bar.bar-3 {
+    height: 30px;
+    margin-top: 10px;
+}
+.health-bars .health-bar.bar-4 {
+    height: 40px;
+    margin-top: 0px;
+}
+.health-bars.colour-good .health-bar {
+    color: #27ae60;
+}
+.health-bars.colour-degraded .health-bar {
+    color: #f1c40f;
+}
+.health-bars.colour-bad .health-bar {
+    color: #e74c3c;
+}
+.health-bars.count-1 .health-bar.bar-1 {
+    background-color: currentColor;
+}
+.health-bars.count-2 .health-bar.bar-1,
+.health-bars.count-2 .health-bar.bar-2 {
+    background-color: currentColor;
+}
+.health-bars.count-3 .health-bar.bar-1,
+.health-bars.count-3 .health-bar.bar-2,
+.health-bars.count-3 .health-bar.bar-3 {
+    background-color: currentColor;
+}
+.health-bars.count-4 .health-bar.bar-1,
+.health-bars.count-4 .health-bar.bar-2,
+.health-bars.count-4 .health-bar.bar-3,
+.health-bars.count-4 .health-bar.bar-4 {
+    background-color: currentColor;
+}
+
+.loyalty-card {
+    margin: 15px auto 30px;
+    width: 290px;
+    height: 160px;
+    border: 1px solid #CCC;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 10px 20px;
+    background-color: #FFF;
+    background-position: center center;
+    position: relative;
+    overflow: hidden;
+}
+.loyalty-card::before,
+.loyalty-card::after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    right: -50px;
+    height: 30px;
+    z-index: 1;
+    transform: rotate(-15deg);
+}
+.loyalty-card::before {
+    bottom: 30px;
+    background-color: #ffa200;
+}
+.loyalty-card::after {
+    bottom: 0;
+    background-color: #0098DB;
+}
+.loyalty-card .card-logo {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-weight: bold;
+    width: 75px;
+    color: #0098DB;
+}
+.loyalty-card .card-logo-tagline {
+    font-size: 17px;
+    color: #ffa200;
+}
+.loyalty-card .card-stamps {
+    position: absolute;
+    z-index: 5;
+    top: 10px;
+    right: 10px;
+    width: 181px;
+    padding: 5px 0 0 5px;
+    border-radius: 5px;
+    background-color: rgb(250, 250, 250);
+    background-color: rgba(250, 250, 250, 0.75);
+    border: 1px solid #ffa200;
+}
+.loyalty-card .card-stamp {
+    float: left;
+    margin: 0 5px 5px 0;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+    width: 24px;
+    height: 24px;
+    border: 1px dashed #666;
+    opacity: 0.5;
+    position: relative;
+}
+.loyalty-card .card-stamp-collected {
+    opacity: 1;
+}
+.loyalty-card .card-stamp-collected:after {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    display: inline-block;
+    content: "\e013";
+    font-family: 'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    color: #FFF;
+    background-color: #0098DB;
+    transform: rotate(6deg);
+}
+.loyalty-card .card-stamp-final {
+    color: #F1C40F;
+    border-color: #F1C40F;
+    border-style: solid;
+    background-color: #F9F0CC;
+    opacity: 1;
+    font-weight: bold;
+    font-size: 17px;
+}
+.loyalty-card .card-stamp-final .glyphicon {
+    top: 2px;
+    left: 1px;
+}
+.loyalty-card .card-collect-btn {
+    display: block;
+    clear: both;
+    text-decoration: none;
+    color: #FFF;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background-color: #ffa200;
+    line-height: 22px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 4px;
+}
+.loyalty-card .card-collect-btn.disabled {
+    background-color: #BBB;
+    color: #666;
+    opacity: 0.8;
+}
+.loyalty-card .card-owner {
+    z-index: 10;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 0 10px;
+    line-height: 20px;
+    text-align: right;
+    font-size: 14px;
+    color: #000;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+.hai-account-usage-breakdown {                
+    padding: 5px 10px 10px 10px;
+}                                             
+
+.hai-usage-row {
+    position: relative;                       
+    border-top: 1px solid #F0F0F0;            
+    padding: 5px 10px;
+    line-height: 1.42;                        
+}                                             
+.hai-usage-row:first-child {
+    border-top: 0;                            
+}                                             
+.hai-usage-row .usage-service-name {
+    margin-right: 100px;                      
+    position: relative;                       
+    z-index: 5;
+}                                             
+.hai-usage-row .usage-service-total {         
+    float: right;
+    text-align: right;                        
+    width: 100px;                             
+    position: relative;
+    z-index: 5;                               
+}                                             
+.hai-usage-row .usage-progress-bar-tracks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+.hai-usage-row .usage-progress-bar-train {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #FAE5F0;
+    background-color: rgba(210, 0, 116, 0.1);
+}

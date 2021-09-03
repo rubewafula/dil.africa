@@ -4,6 +4,8 @@ namespace Modules\Customer\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Cache;
+
 class Special_offer extends Model
 {
     /**
@@ -34,9 +36,20 @@ class Special_offer extends Model
     }
     
     public function getSpecialOffers(){
+
+        if(Cache::has('special_offers')) {
+
+            $offers = Cache::get('special_offers');
+
+        }else{
         
-        $offers = $this->where("expires_on", ">", date("Y-m-d h:i:s"))
-                ->orderBy('id', 'DESC')->get();
+            $offers = $this->where("expires_on", ">", date("Y-m-d H:i:s"))
+                ->orderBy('priority')->get();
+
+            $minutes = 5;
+
+            Cache::add('special_offers', $offers, $minutes);
+        }
         
         return $offers;
     }

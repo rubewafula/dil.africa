@@ -69,7 +69,21 @@
                                             @foreach($areas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->zone_id }}</td><td>{{ $item->city_id }}</td>
+                                        <td>{{ $item->name }}</td>
+
+                                        <td>
+                                            @if(App\Zone::where('id',$item->zone_id)->exists())
+                                            {{ $item->zone->name }}
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if(App\City::where('id',$item->city_id)->exists())
+                                            {{ $item->city->name }}
+
+                                            @endif
+
+                                        </td>
                                         <td>
                                             
                                             <a href="{{ url('/backend/areas/' . $item->id . '/edit') }}" title="Edit Area"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

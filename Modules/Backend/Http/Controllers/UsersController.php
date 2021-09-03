@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use Illuminate\Http\Request;
+use Validator;
+
 
 class UsersController extends Controller
 {
@@ -51,11 +53,25 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         
-        $requestData = $request->all();
-        
-        User::create($requestData);
+        $request->validate([
+             'first_name'=>'required',
+             'last_name'=>'required',
+             'email'=>'required|email',
+             'password'=>'required|min:5|max:20',
+             'role_id'=>'required'
+        ]);
 
-        return redirect('backend/users')->with('flash_message', 'User added!');
+
+        $requestData = $request->all();
+
+        $requestData['password']= bcrypt($request->password);
+        $requestData['is_customer'] = 0;
+        
+        $user=   User::create($requestData);
+
+        $user->attachRole($request->role_id);
+
+        return redirect()->back()->with('flash_message', 'User added!');
     }
 
     /**
@@ -96,11 +112,31 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+            $request->validate([
+             'first_name'=>'required',
+             'last_name'=>'required',
+             'email'=>'required|email',
+             'password'=>'nullable|min:5|max:20',
+        ]);
+
         
-        $requestData = $request->all();
+        $requestData = $request->except('password');
+
+  if($request->has('password'))
+  {
+    $requestData['password']= bcrypt($request->password);
+  }
+
         
         $user = User::findOrFail($id);
         $user->update($requestData);
+
+        if($request->has('role_id'))
+        {
+
+            $user->attachRole($request->role_id);
+        }
 
         return redirect('backend/users')->with('flash_message', 'User updated!');
     }
@@ -117,5 +153,16 @@ class UsersController extends Controller
         User::destroy($id);
 
         return redirect('backend/users')->with('flash_message', 'User deleted!');
+    }
+
+
+    public  function  remove_user_role($user_id,$role_id)
+    {
+
+       $user=  User::findOrFail($user_id);
+       $user->DetachRole($role_id);
+
+       return  redirect()->back()->with('flash_message','User  Role  removed  successfully');
+
     }
 }

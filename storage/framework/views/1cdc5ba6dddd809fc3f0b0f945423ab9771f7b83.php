@@ -15,8 +15,11 @@
                             <div class="col col-xs-5">
                                 <div class="product-image">
                                     <div class="image">
-                                        <a href="#">
-                                            <img src="assets/images/products/<?php echo e($offer->product->getDefaultImage()->image_url); ?>" alt="">
+                                        <a href="<?php echo e(url('shop/product/detail/'.$offer->product->slug)); ?>">
+                                            <div class="featured-img">
+                                                <span class="helper"></span>
+                                                <img  class="img-featured" src="assets/images/products/<?php echo e($offer->product->getDefaultImage()->image_url); ?>" alt="">
+                                            </div>
                                         </a>					
                                     </div><!-- /.image -->
 
@@ -24,11 +27,11 @@
                             </div><!-- /.col -->
                             <div class="col col-xs-7">
                                 <div class="product-info">
-                                    <h3 class="name"><a href="#"><?php echo e($offer->product->name); ?></a></h3>
+                                    <h3 class="name"><a href="<?php echo e(url('shop/product/detail/'.$offer->product->slug)); ?>"><?php echo e($offer->product->name); ?></a></h3>
                                     <div class="rating rateit-small"></div>
                                     <div class="product-price">	
                                         <span class="price">
-                                            Ksh <?php echo e($offer->offer_price); ?>				
+                                            Ksh <?php echo e(number_format($offer->offer_price)); ?>				
                                         </span>
 
                                     </div><!-- /.product-price -->

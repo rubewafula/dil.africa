@@ -1,7 +1,21 @@
 <div class="form-group {{ $errors->has('category_id') ? 'has-error' : ''}}">
-    <label for="category_id" class="col-md-4 control-label">{{ 'Category Id' }}</label>
+    <label for="category_id" class="col-md-4 control-label">{{ 'Category ' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="category_id" type="number" id="category_id" value="{{ $sub_category->category_id or ''}}" >
+     <!--    <input class="form-control" name="category_id" type="number" id="category_id" value="{{ $sub_category->category_id or ''}}" > -->
+     <?php $categories= App\Category::pluck('name','id')->prepend('Select',''); ?>
+ @if(isset($sub_category->category_id) && $sub_category->category_id > 0)
+
+       {{Form::select('category_id',$categories,$sub_category->category_id,['class'=>'form-control'])}}
+
+
+ @else
+
+      {{Form::select('category_id',$categories,null,['class'=>'form-control'])}}
+
+
+ @endif
+
+
         {!! $errors->first('category_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
@@ -10,16 +24,25 @@
         <input class="form-control" name="name" type="text" id="name" value="{{ $sub_category->name or ''}}" required>
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
-    <label for="slug" class="col-md-4 control-label">{{ 'Slug' }}</label>
-    <div class="col-md-6">
-        <input class="form-control" name="slug" type="text" id="slug" value="{{ $sub_category->slug or ''}}" >
-        {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group {{ $errors->has('cover_photo') ? 'has-error' : ''}}">
+</div>
+
+@if(!empty($sub_category->cover_photo))
+
+<div  class="form-group">
+    
+    <label class="col-md-4 control-label"> Cover  Photo</label>
+        <div class="col-md-6">
+            <img src="{{asset($sub_category->cover_photo)}}"/> <a href="{{  url('backend/remove_subcategory_pic/'.$sub_category->id)}}">Remove</a>
+</div>
+
+</div>
+
+@endif
+
+<div class="form-group {{ $errors->has('cover_photo') ? 'has-error' : ''}}">
     <label for="cover_photo" class="col-md-4 control-label">{{ 'Cover Photo' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="cover_photo" type="text" id="cover_photo" value="{{ $sub_category->cover_photo or ''}}" required>
+        <input class="form-control" name="cover_photo" type="file" id="cover_photo" value="{{ $sub_category->cover_photo or ''}}" >
         {!! $errors->first('cover_photo', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
