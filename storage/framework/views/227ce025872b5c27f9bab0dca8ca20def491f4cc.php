@@ -1,6 +1,11 @@
 <?php $__env->startSection('content'); ?>
 
 <script>
+  fbq('track', 'Search');
+</script>
+
+
+<script>
 
 $(document).ready(function(){
     
@@ -103,7 +108,7 @@ $(document).ready(function(){
                         </div><!-- /.col -->
                             <div class="col col-sm-6 col-md-6 no-padding">
                                 <div class="lbl-cnt">
-                                    <span class="lbl">Sort by</span>
+                                    <span class="lbl">Sort byy</span>
                                     <div class="fld inline">
                                         <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                                             <button data-toggle="dropdown" type="button" class="btn dropdown-toggle">
@@ -125,6 +130,13 @@ $(document).ready(function(){
                                     </div><!-- /.fld -->
                                 </div><!-- /.lbl-cnt -->
                             </div><!-- /.col -->
+
+                            <div class="col col-sm-6 col-md-4  text-right">
+                                
+                                <!-- Pagination Here -->
+
+                                                       
+                            </div>
                         
                     </div><!-- /.row -->
                 </div>
@@ -153,29 +165,15 @@ $(document).ready(function(){
                             </div><!-- /.category-product -->
                         </div><!-- /.tab-pane #list-container -->
                     </div><!-- /.tab-content -->
-                    <div class="clearfix filters-container">
-
-                        <!-- <div class="text-right">
-                            <div class="pagination-container">
-                                <ul class="list-inline list-unstyled">
-                                    <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                    <li><a href="#">1</a></li>	
-                                    <li class="active"><a href="#">2</a></li>	
-                                    <li><a href="#">3</a></li>	
-                                    <li><a href="#">4</a></li>	
-                                    <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                </ul>
-                            </div>						    
-                        </div> -->
-
-                    </div><!-- /.filters-container -->
+                    
+                    <!-- Pagination Here -->
 
                 </div><!-- /.search-result-container -->
 
             </div><!-- /.col -->
 
             <div class='col-md-3 sidebar hidden-md hidden-lg'>
-                <?php echo $__env->make('customer::category.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <?php echo $__env->make('customer::category.sidebar_xs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
 
         </div><!-- /.row -->

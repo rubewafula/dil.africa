@@ -1,4 +1,5 @@
-<?php ( $elec_categories = \App\Featured_category::where('main_category', 62)->get() ); ?>
+<?php ($featured_category = new \App\Featured_category()); ?>
+<?php ($elec_categories = $featured_category->getFeaturedElectronicCategories()); ?>
 
 <nav class="yamm megamenu-horizontal" role="navigation">
     <ul class="nav">

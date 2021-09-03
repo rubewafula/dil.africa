@@ -7,8 +7,54 @@
     Search Results for <span class="blue-fg"><?php echo e(substr($title, 13)); ?></span>
 </div>
 <?php else: ?>
- <div class="row" style="padding: 10px 0px 3px 15px;font-size: 14px;border-bottom: 2px solid #CCC;">   
-    No products found for <span class="blue-fg">"<?php echo e(substr($title, 13)); ?>"</span>. Please try to search using a different criteria.
+ <div class="row" style="padding: 10px 0px 0px 15px;font-size: 14px;">   
+    
+    <div style="    font-size: 14px;
+    color: #0F7DC2;
+    line-height: 1.8em;
+    background: #eee;
+    padding: 10px;
+    margin-bottom: 10px;"> Sorry, we did not find products for  
+        <span class="blue-fg">"<?php echo e(substr($title, 13)); ?>"</span>.
+        <span style="font-weight: bold;"> However do not worry. 
+        <span style="color: #CC0000;">Leave your details with us here below and we will get a good deal for you and get back to you!</span> </span> </div>
+
+    <div class="col-xs-12 create-new-account">
+
+    <style type="text/css">
+        
+        .form-group .info-title{ font-weight: normal; }
+
+    </style>
+
+    <form class="address-form" role="form" method="POST" action="<?php echo e(url('shop/save-search')); ?>">
+
+        <input type="hidden" value="<?php echo e(isset($searched_item_id)?$searched_item_id:""); ?>" name="searched_item_id" />
+        <div class="col-sm-12 already-registered-login">
+            <div class="form-group">
+                <label class="info-title" for="item_looking_for">What are you looking for? <span>*</span></label>
+                <input type="text" class="form-control unicase-form-control text-input" id="item_looking_for" name="item_looking_for" value="<?php echo e(substr($title, 13)); ?>" placeholder=""/>
+            </div>                                                                                  
+        </div>
+        <div class="col-sm-12 already-registered-login">
+            
+            <div class="form-group">
+                <label class="info-title" for="phone">Your Phone Number <span>*</span></label>
+                <input type="text" class="form-control unicase-form-control text-input" id="phone" name="phone" placeholder=""/>
+            </div> 
+        </div>
+        <div class="col-sm-12 already-registered-login">
+            <div class="form-group">
+                <label class="info-title" for="email">Your Email Address </label>
+                <input type="text" class="form-control unicase-form-control text-input" id="email" name="email" placeholder=""/>
+            </div> 
+        </div>
+        <div class="col-sm-12 already-registered-login">
+            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Save (Get Me a Good Deal)</button>
+        </div>
+    </form>
+
+</div>
 </div>
 <?php endif; ?>
 
@@ -19,7 +65,7 @@
 <div class="row"  style="border-bottom: 1px solid #EEE;">
 <?php endif; ?>
 <?php ($product_image = Modules\Customer\Utilities\Utilities::getDefaultImage($product->id)); ?>
-<div class="col-xs-6 col-sm-6 wow fadeInUp">
+<div class="col-xs-6 col-sm-6">
     <div class="products">
         <div class="product" style="margin-bottom: 5px;">		
             <div class="product-image">
@@ -62,18 +108,18 @@
                     <?php ($sale_price = 0); ?>
                     <span class="price">
                     <?php if($offer_price != null && $offer_price != ""): ?>
-                    Ksh <?php echo e(number_format($offer_price)); ?>
+                    Ksh <?php echo e(number_format($offer_price + $product->getShippingCost())); ?>
 
                     <?php ($sale_price = $offer_price); ?>
                     </span>
                     <span class="price-before-discount">
-                        KSh <?php echo e(number_format($standard_price)); ?>
+                        KSh <?php echo e(number_format($standard_price + $product->getShippingCost())); ?>
 
                         <?php ($sale_price = $standard_price); ?>
                     </span> 
                     <?php else: ?> 
                     <span class="price">
-                    Ksh <?php echo e(number_format($standard_price)); ?>
+                    Ksh <?php echo e(number_format($standard_price + $product->getShippingCost())); ?>
 
                     <?php ($sale_price = $standard_price); ?>
                     <?php endif; ?>      
@@ -91,7 +137,7 @@
                         
                     <span class="price">
 
-                        KSh <?php echo e(number_format($min_price)); ?> - KSh <?php echo e(number_format($max_price)); ?>
+                        KSh <?php echo e(number_format($min_price + $product->getShippingCost())); ?> - KSh <?php echo e(number_format($max_price + $product->getShippingCost())); ?>
 
                         <?php ($sale_price = $max_price); ?>
                     </span>

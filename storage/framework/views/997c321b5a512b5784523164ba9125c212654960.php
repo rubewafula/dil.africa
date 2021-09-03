@@ -1,113 +1,112 @@
 <script>
-
-$(document).ready(function(){
-
-
-    $('.product .product-image img').css({
-
-        
-        left: ($(window).width() - $('.product .product-image img').outerWidth())/2,
-        top: ($(window).height() - $('.product .product-image img').outerHeight())/2
-    });
+    $(document).ready(function() {
 
 
-    // To initially run the function:
-    $(window).resize();
-    
-    $("#pickup_station_div").hide();
-    
-    <?php (Session::put('user_address_id', "")); ?>
-    <?php (Session::put('delivery_type', 'home_office_delivery')); ?>
-    <?php ($userId = Session::get('userId')); ?>
-    <?php if($userId != null): ?>
-    <?php ($user_address = \Modules\Customer\Entities\User_address::where('user_id',$userId)
-                    ->where('default', 1)->first()); ?>
-    <?php if($user_address != null): ?>
-    <?php (Session::put('user_address_id', $user_address->id)); ?>
-    <?php endif; ?>
-    <?php endif; ?>
-    
-    $("#selection_message").html("'Home / Office Delivery' is selected by default.\n\
+        $('.product .product-image img').css({
+
+
+            left: ($(window).width() - $('.product .product-image img').outerWidth()) / 2,
+            top: ($(window).height() - $('.product .product-image img').outerHeight()) / 2
+        });
+
+
+        // To initially run the function:
+        $(window).resize();
+
+        $("#pickup_station_div").hide();
+
+        <?php
+        Session::put('user_address_id', "");
+        Session::put('delivery_type', 'home_office_delivery');
+        $userId = Session::get('userId');
+        if ($userId != null) {
+            $user_address = \Modules\Customer\Entities\User_address::where('user_id', $userId)->where('default', 1)->first();
+            if ($user_address != null) {
+                Session::put('user_address_id', $user_address->id);
+            }
+        }
+        ?>
+
+        $("#selection_message").html("'Home / Office Delivery' is selected by default.\n\
              You can change this if you wish to pick up your goods from one of \n\
                 our pickup stations.");
-        
-    var BASE_URL = "<?php echo e(url('/shop/')); ?>";
-    
-    $(".country-select").change(function(){
-        
-        var country_id = $(this).val();
-        var filedata = new FormData();
-        
-        filedata.append('country', country_id);
-        $.ajax({
-            url: BASE_URL + "/cities",
-            data: filedata,
-            cache: false,
-            processData: false, // Don't process the files
-            contentType: false,
-            type: 'post',
-            success: function (output) {
 
-                if (output.status == '200') {
-                    
-                    $(".city-select").html(output.html);                              
+        var BASE_URL = "<?php echo e(url('/shop/')); ?>";
+
+        $(".country-select").change(function() {
+
+            var country_id = $(this).val();
+            var filedata = new FormData();
+
+            filedata.append('country', country_id);
+            $.ajax({
+                url: BASE_URL + "/cities",
+                data: filedata,
+                cache: false,
+                processData: false, // Don't process the files
+                contentType: false,
+                type: 'post',
+                success: function(output) {
+
+                    if (output.status == '200') {
+
+                        $(".city-select").html(output.html);
+                    }
                 }
-            }
-        });
-        
-    });
-    
-    
-    $(".city-select").change(function(){
-        
-        var city_id = $(this).val();
-        var filedata = new FormData();
-        
-        filedata.append('city', city_id);
-        $.ajax({
-            url: BASE_URL + "/zones",
-            data: filedata,
-            cache: false,
-            processData: false, // Don't process the files
-            contentType: false,
-            type: 'post',
-            success: function (output) {
+            });
 
-                if (output.status == '200') {
-                    
-                    $(".zone-select").html(output.html);                              
+        });
+
+
+        $(".city-select").change(function() {
+
+            var city_id = $(this).val();
+            var filedata = new FormData();
+
+            filedata.append('city', city_id);
+            $.ajax({
+                url: BASE_URL + "/zones",
+                data: filedata,
+                cache: false,
+                processData: false, // Don't process the files
+                contentType: false,
+                type: 'post',
+                success: function(output) {
+
+                    if (output.status == '200') {
+
+                        $(".zone-select").html(output.html);
+                    }
                 }
-            }
+            });
+
         });
-        
-    });
-    
-    
-    $(".zone-select").change(function(){
-        
-        var zone_id = $(this).val();
-        var filedata = new FormData();
-        
-        filedata.append('zone', zone_id);
-        $.ajax({
-            url: BASE_URL + "/areas",
-            data: filedata,
-            cache: false,
-            processData: false, // Don't process the files
-            contentType: false,
-            type: 'post',
-            success: function (output) {
 
-                if (output.status == '200') {
 
-                    $(".area-select").html(output.html);                              
+        $(".zone-select").change(function() {
+
+            var zone_id = $(this).val();
+            var filedata = new FormData();
+
+            filedata.append('zone', zone_id);
+            $.ajax({
+                url: BASE_URL + "/areas",
+                data: filedata,
+                cache: false,
+                processData: false, // Don't process the files
+                contentType: false,
+                type: 'post',
+                success: function(output) {
+
+                    if (output.status == '200') {
+
+                        $(".area-select").html(output.html);
+                    }
                 }
-            }
-        });
-        
-    });
-});
+            });
 
+        });
+    });
 </script>
 
 <!-- ============================================== HEADER ============================================== -->
@@ -115,16 +114,15 @@ $(document).ready(function(){
 
     <!-- ============================================== TOP MENU ============================================== -->
     <div class="top-bar animate-dropdown">
-      <!--   <div class="top-header col-sm-12 hidden-xs">
+        <!--   <div class="top-header col-sm-12 hidden-xs">
                 The Most Competitive Prices on Quality Products, Same Day Delivery, A Simplified Return Process to give you The Ultimate Customer Experience!
         </div> -->
-           <div class="col-sm-12 hidden-xs" style="padding-left: 7px;padding-right: 7px;">
-          <a href="https://dil.africa/shop/campaign/11"> 
-            <img src="<?php echo e(url('black_friday.png')); ?>" alt=" Shujaa Deals"></a>
-             <!--    The Most Competitive Prices on Quality Products, Same Day Delivery, A Simplified Return Process to give you The Ultimate Customer Experience! -->
-        </div>
+        <!-- <div class="col-sm-12 hidden-xs" style="padding-left: 7px;padding-right: 7px;">
+            <a href="https://dil.africa/shop/campaign/11">
+                <img src="<?php echo e(url('black_friday.png')); ?>" alt=" Shujaa Deals"></a>
+        </div> -->
         <div class="container">
-            
+
             <div class="header-top-inner hidden-sm  hidden-xs">
                 <div class="cnt-account">
                     <ul class="list-unstyled" style="text-transform:uppercase; font-size:11px">
@@ -133,7 +131,7 @@ $(document).ready(function(){
                         <li><a href="<?php echo e(url('shop/wishlist')); ?>"><i class="icon fa fa-heart"></i>My Wishlist</a></li>
                         <li><a href="<?php echo e(url('/shop/cart')); ?>"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="<?php echo e(url('/shop/checkout')); ?>"><i class="icon fa fa-check"></i>Checkout</a></li>
-                        <li><a  href="<?php echo e(url('shop/history')); ?>">My History</a></li>
+                        <li><a href="<?php echo e(url('shop/history')); ?>">My History</a></li>
                         <?php if(Auth::user() == null): ?>
                         <li><a href="<?php echo e(url('/shop/sign-in')); ?>"><i class="icon fa fa-lock"></i>Login</a></li>
                         <?php endif; ?>
@@ -174,86 +172,60 @@ $(document).ready(function(){
 
                         </a>
                     </div><!-- /.logo -->
-                    <!-- ============================================================= LOGO : END ============================================================= -->				
-                    </div><!-- /.logo-holder -->
+                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </div><!-- /.logo-holder -->
 
-                    <div class="col-xs-3 container hidden-md hidden-lg" style="margin-top: 15px;">
-            
-                        <div class="header-top-inner hidden-md hidden-lg">
-                            <div class="cnt-account">
-                                <ul class="list-unstyled" style="text-transform:uppercase; font-size:11px">
-                                    <?php if(Auth::user() == null): ?>
-                                    <li><a href="<?php echo e(url('/shop/sign-in')); ?>"><i class="icon fa fa-lock"></i>Login</a></li>
-                                    <?php endif; ?>
-                                    <?php if(Auth::check()): ?>
-                                    <li class="dropdown  navbar-right special-menu">
-                                        <a href="<?php echo e(url('/shop/logout')); ?>">
-                                            <span style="color: #fff;background: #F89530;padding: 3px 5px;border-radius: 3px;">Logout</span>
-                                        </a>
-                                    </li>
-                                    <?php if(Auth::user()->active == 0): ?>
-                                    <li class="dropdown  navbar-right special-menu">
-                                        <a href="">
-                                            <span style="color: #fff;background: #CC0000;padding: 3px 5px;border-radius: 3px;">Verify Account</span>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-                                    <?php endif; ?>
-                                </ul>
-                            </div><!-- /.cnt-account -->
+                <div class="col-xs-3 container hidden-md hidden-lg" style="margin-top: 15px;">
 
-                            <!-- /.cnt-cart -->
-                            <div class="clearfix"></div>
-                        </div><!-- /.header-top-inner -->
-                    </div><!-- /.container -->
+                    <div class="header-top-inner hidden-md hidden-lg">
+                        <div class="cnt-account">
+                            <ul class="list-unstyled" style="text-transform:uppercase; font-size:11px">
+                                <?php if(Auth::user() == null): ?>
+                                <li><a href="<?php echo e(url('/shop/sign-in')); ?>"><i class="icon fa fa-lock"></i>Login</a></li>
+                                <?php endif; ?>
+                                <?php if(Auth::check()): ?>
+                                <li class="dropdown  navbar-right special-menu">
+                                    <a href="<?php echo e(url('/shop/logout')); ?>">
+                                        <span style="color: #fff;background: #F89530;padding: 3px 5px;border-radius: 3px;">Logout</span>
+                                    </a>
+                                </li>
+                                <?php if(Auth::user()->active == 0): ?>
+                                <li class="dropdown  navbar-right special-menu">
+                                    <a href="">
+                                        <span style="color: #fff;background: #CC0000;padding: 3px 5px;border-radius: 3px;">Verify Account</span>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                            </ul>
+                        </div><!-- /.cnt-account -->
 
-                    <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
+                        <!-- /.cnt-cart -->
+                        <div class="clearfix"></div>
+                    </div><!-- /.header-top-inner -->
+                </div><!-- /.container -->
+
+                <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
                         <form method="POST" action="<?php echo e(url('shop/search')); ?>">
                             <div class="control-group">
+                                <input class="search-button-custom hidden-xs hidden-sm" type="submit" value="SEARCH" />
 
-                                <ul class="categories-filter animate-dropdown hidden-xs">
-                                    <li class="dropdown">
-
-                                        <a class="dropdown-toggle"  data-toggle="dropdown" href="<?php echo e(url('shop/category')); ?>">Categories <b class="caret"></b></a>
-
-                                        <?php ( $allcategories = \Modules\Customer\Entities\Category::where('status', 1)->where('level', 1)->orderBy('priority')->get() ); ?>                                       
-                                        <ul class="dropdown-menu" role="menu" >
-                                            <?php $__currentLoopData = $allcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($category->getNoOfProducts() < 3): ?>
-                                            <?php continue; ?>;
-                                            <?php endif; ?>
-                                            <li class="menu-header"><?php echo e($category->name); ?></li>
-                                            <?php ($sub_categories = $category->getSubCategories()); ?>
-                                            <?php $__currentLoopData = $sub_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub_cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($sub_cat->getNoOfProducts() < 3): ?>
-                                            <?php continue; ?>;
-                                            <?php endif; ?>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="<?php echo e(url('/shop/category/'.$sub_cat->slug)); ?>">- <?php echo e($sub_cat->name); ?></a>
-                                            </li>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </ul>                                       
-                                    </li>
-                                </ul>
-                                <!-- <input class="search-field hidden-xs hidden-sm" name="pattern" style="width: 56%;" placeholder="Search for products in different Brands & Categories..." /> -->
-                                <input class="search-button-custom hidden-xs hidden-sm" type="submit" value="SEARCH"/>  
-
-                                <input class="search-field" name="pattern" style="width: 56%;padding: 7px 10px 7px;font-size: 12px;" placeholder="Search for products,brands..." />
-                                <input class="search-button-custom hidden-md hidden-lg" style="padding: 5px;" type="submit" value="SEARCH"/>   
+                                <input class="search-field" name="pattern" style="font-size: 12px;" placeholder="Search for products,brands..." />
+                                <input class="search-button-custom hidden-md hidden-lg" style="padding: 5px;" type="submit" value="SEARCH" />
                             </div>
                         </form>
                     </div><!-- /.search-area -->
-                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->				</div><!-- /.top-search-holder -->
+                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+                </div><!-- /.top-search-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row hidden-sm hidden-xs">
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
                     <div class="dropdown dropdown-cart" style="width: 100%;">
-<!--                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">-->
+                        <!--                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">-->
                         <a href="<?php echo e(url('shop/cart')); ?>" class="dropdown-toggle lnk-cart" style="width: 100%;">
                             <div class="items-cart-inner" style="margin: 0px auto;">
                                 <div class="basket">
@@ -262,7 +234,7 @@ $(document).ready(function(){
 
                                 <?php ($total_price = \Modules\Customer\Utilities\Utilities::getCustomerTotalCartPrice()); ?>
                                 <?php ($quantity = \Modules\Customer\Utilities\Utilities::getCustomerTotalCartItems()); ?>
-                                
+
                                 <?php ($cart = Session::get('cart')); ?>
                                 <?php if($cart != null): ?>
                                 <?php if(count($cart) > 0): ?>
@@ -276,27 +248,28 @@ $(document).ready(function(){
                                         <?php endif; ?>
                                     </span>
                                 </div>
-                                <?php else: ?> 
+                                <?php else: ?>
                                 <div class="basket-item-count"><span class="count">0</span></div>
                                 <div class="total-price-basket">
                                     <span class="lbl">cart -</span>
                                     <span class="total-price">
                                         <span class="sign">KSh </span><span class="value">0.00</span>
                                     </span>
-                                </div>                            
+                                </div>
                                 <?php endif; ?>
-                                <?php else: ?> 
+                                <?php else: ?>
                                 <div style="padding-top: 10px;padding-left: 50px;font-size: 14px;">
                                     Your Cart is Empty
-                                </div>                            
+                                </div>
                                 <?php endif; ?>
 
                             </div>
                         </a>
-                        
+
                     </div><!-- /.dropdown-cart -->
 
-                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->				</div><!-- /.top-cart-row -->
+                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                </div><!-- /.top-cart-row -->
             </div><!-- /.row -->
 
         </div><!-- /.container -->
@@ -322,201 +295,176 @@ $(document).ready(function(){
                                 <li class="active dropdown yamm-fw">
                                     <a href="<?php echo e(url('/')); ?>">Home</a>
                                 </li>
-                                <?php ( $categories = \Modules\Customer\Entities\Category::where('status', 1)->where('level', 1)->orderBy('priority')->limit(8)->get() ); ?>
+                                <?php ( $categories = \Modules\Customer\Utilities\Utilities::getMainCategoriesLimited() ); ?>
                                 <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($category->getNoOfProducts() < 3): ?>
-                                <?php continue; ?>;
-                                <?php endif; ?>
-                                <li class="dropdown yamm mega-menu">
+                                <?php if($category->getNoOfProducts() < 3): ?> <?php continue; ?>; <?php endif; ?> <li class="dropdown yamm mega-menu">
                                     <a href="<?php echo e(url('/')); ?>" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(strtoupper($category->name)); ?></a>
                                     <ul class="dropdown-menu container">
                                         <li>
                                             <div class="yamm-content ">
                                                 <div class="row">
 
-                                                    <?php ($subCategories = \Modules\Customer\Entities
-                                                    \Category::where('depends_on', $category->id)
-                                                    ->where('status', 1)->get()); ?>
+                                                    <?php ($subCategories = $category->getSubCategories()); ?>
 
                                                     <?php $__currentLoopData = $subCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($subCategory->getNoOfProducts() < 3): ?>
-                                                    <?php continue; ?>;
-                                                    <?php endif; ?>
-                                                    <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                                    <?php if($subCategory->getNoOfProducts() < 3): ?> <?php continue; ?>; <?php endif; ?> <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
                                                         <h2 class="title">
                                                             <a href="<?php echo e(url('/shop/category/'.$subCategory->slug)); ?>" style="padding:10px 0px 0px 0px;font-weight: normal;">
                                                                 <?php echo e(strtoupper($subCategory->name)); ?>
 
                                                             </a>
-                                                        </h2>                                                                                 
+                                                        </h2>
                                                         <ul class="links">
-                                                            
-                                                            <?php ($miniCategories = \Modules\Customer\Entities
-                                                                \Category::where('depends_on', $subCategory->id)
-                                                                ->where('status', 1)->get()); ?>
-                                                            
+
+                                                            <?php ($miniCategories = $subCategory->getSubCategories()); ?>
+
                                                             <?php $__currentLoopData = $miniCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $miniCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <?php if($miniCategory->getNoOfProducts() < 3): ?>
-                                                            <?php continue; ?>;
-                                                            <?php endif; ?>
-                                                            <li style="padding-left: 7px;"><a href="<?php echo e(url('shop/category/'.$miniCategory->slug)); ?>"><?php echo e(ucwords($miniCategory->name)); ?></a></li>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                                        </ul>
-                                                    </div><!-- /.col -->
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-			
-                                                </div>
-                                            </div> <!-- /.yamm-content -->	
+                                                            <?php if($miniCategory->getNoOfProducts() < 3): ?> <?php continue; ?>; <?php endif; ?> <li style="padding-left: 7px;"><a href="<?php echo e(url('shop/category/'.$miniCategory->slug)); ?>"><?php echo e(ucwords($miniCategory->name)); ?></a>
                                         </li>
-                                    </ul>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+                                    </ul>
+                        </div><!-- /.col -->
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    </div>
+                </div> <!-- /.yamm-content -->
+                </li>
+                </ul>
+
+                </li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                </ul><!-- /.navbar-nav -->
+                <div class="clearfix"></div>
+            </div><!-- /.nav-outer -->
+        </div><!-- /.navbar-collapse -->
+
+    </div><!-- /.nav-bg-class -->
+    </div><!-- /.navbar-default -->
+
+    <style type="text/css">
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #444;
+        }
+
+        .head {
+
+            text-transform: uppercase;
+            font-size: 21px;
+            margin-top: -5px;
+            color: #565656;
+        }
+
+        .cnt-home .header-style-1 .header-nav .navbar .xs .navbar-nav>li.active {
+            background: #fff;
+        }
+
+        .header-style-1 .header-nav .navbar-default .xs .navbar-nav>li>a {
+            color: #565656;
+            padding: 7px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-style-1 .header-nav .navbar-default .xs .navbar-nav>li.active>a {
+            color: #fff;
+        }
+    </style>
+
+    <div class="yamm navbar navbar-default col-xs-10 col-sm-10 hidden-md hidden-lg" style="background: #fff;" role="navigation">
+        <div class="navbar-header">
+            <button data-target="#mc-horizontal-menu-collapse-xs" data-toggle="collapse" class="navbar-toggle collapsed" style="margin: -7px 0px 7px 0px;padding:10px;" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="head">Categories</div>
+        </div>
+        <div class="nav-bg-class">
+            <div class="navbar-collapse xs collapse" id="mc-horizontal-menu-collapse-xs">
+                <div class="nav-outer">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown yamm-fw">
+                            <a href="<?php echo e(url('/')); ?>">Home</a>
+                        </li>
+                        <?php ( $categories = \Modules\Customer\Utilities\Utilities::getMainCategoriesLimited() ); ?>
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($category->getNoOfProducts() < 3): ?> <?php continue; ?>; <?php endif; ?> <li class="dropdown yamm mega-menu">
+                            <a href="<?php echo e(url('shop/')); ?>" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(strtoupper($category->name)); ?></a>
+                            <ul class="dropdown-menu container">
+                                <li>
+                                    <div class="yamm-content ">
+                                        <div class="row">
+
+                                            <?php ($subCategories = $category->getSubCategories()); ?>
+
+                                            <?php $__currentLoopData = $subCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($subCategory->getNoOfProducts() < 3): ?> <?php continue; ?>; <?php endif; ?> <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                                <h2 class="title">
+                                                    <a href="<?php echo e(url('/shop/category/'.$subCategory->slug)); ?>" style="padding:10px 0px 0px 0px;font-weight: normal;">
+                                                        <?php echo e(strtoupper($subCategory->name)); ?>
+
+                                                    </a>
+                                                </h2>
+                                                <ul class="links">
+
+                                                    <?php ($miniCategories = $subCategory->getSubCategories()); ?>
+
+                                                    <?php $__currentLoopData = $miniCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $miniCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($miniCategory->getNoOfProducts() < 3): ?> <?php continue; ?>; <?php endif; ?> <li style="padding-left: 7px;"><a href="<?php echo e(url('shop/category/'.$miniCategory->slug)); ?>"><?php echo e(ucwords($miniCategory->name)); ?></a>
                                 </li>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                            </ul><!-- /.navbar-nav -->
-                            <div class="clearfix"></div>				
-                        </div><!-- /.nav-outer -->
-                    </div><!-- /.navbar-collapse -->
+                            </ul>
+                </div><!-- /.col -->
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                </div><!-- /.nav-bg-class -->
-            </div><!-- /.navbar-default -->
-
-            <style type="text/css">
-                
-                .navbar-default .navbar-toggle .icon-bar {
-                    background-color: #444;
-                }
-
-                .head{
-
-                    text-transform: uppercase;
-                    font-size: 21px;
-                    margin-top: -5px;
-                    color: #565656;
-                }
-
-                .cnt-home .header-style-1 .header-nav .navbar .xs .navbar-nav > li.active {
-                    background: #fff;
-                }
-
-                .header-style-1 .header-nav .navbar-default .xs  .navbar-nav > li > a {
-                    color: #565656;
-                    padding: 7px;
-                    border-bottom: 1px solid #eee;
-                }
-
-                .header-style-1 .header-nav .navbar-default .xs .navbar-nav > li.active > a {
-                    color: #fff;
-                }
-            </style>
-
-            <div class="yamm navbar navbar-default col-xs-10 col-sm-10 hidden-md hidden-lg" style="background: #fff;" role="navigation">
-                <div class="navbar-header">
-                    <button data-target="#mc-horizontal-menu-collapse-xs" data-toggle="collapse" class="navbar-toggle collapsed" style="margin: -7px 0px 7px 0px;padding:10px;" type="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="head">Categories</div>
-                </div>
-                <div class="nav-bg-class">
-                    <div class="navbar-collapse xs collapse" id="mc-horizontal-menu-collapse-xs">
-                        <div class="nav-outer">
-                            <ul class="nav navbar-nav">
-                                <li class="dropdown yamm-fw">
-                                    <a href="<?php echo e(url('/')); ?>">Home</a>
-                                </li>
-                                <?php ( $categories = \Modules\Customer\Entities\Category::where('status', 1)->where('level', 1)->orderBy('priority')->get() ); ?>
-                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($category->getNoOfProducts() < 3): ?>
-                                <?php continue; ?>;
-                                <?php endif; ?>
-                                <li class="dropdown yamm mega-menu">
-                                    <a href="<?php echo e(url('shop/')); ?>" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"><?php echo e(strtoupper($category->name)); ?></a>
-                                    <ul class="dropdown-menu container">
-                                        <li>
-                                            <div class="yamm-content ">
-                                                <div class="row">
-
-                                                    <?php ($subCategories = \Modules\Customer\Entities
-                                                    \Category::where('depends_on', $category->id)
-                                                    ->where('status', 1)->get()); ?>
-
-                                                    <?php $__currentLoopData = $subCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($subCategory->getNoOfProducts() < 3): ?>
-                                                    <?php continue; ?>;
-                                                    <?php endif; ?>
-                                                    <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <h2 class="title">
-                                                            <a href="<?php echo e(url('/shop/category/'.$subCategory->slug)); ?>" style="padding:10px 0px 0px 0px;font-weight: normal;">
-                                                                <?php echo e(strtoupper($subCategory->name)); ?>
-
-                                                            </a>
-                                                        </h2>                                                                                 
-                                                        <ul class="links">
-                                                            
-                                                            <?php ($miniCategories = \Modules\Customer\Entities
-                                                                \Category::where('depends_on', $subCategory->id)
-                                                                ->where('status', 1)->get()); ?>
-                                                            
-                                                            <?php $__currentLoopData = $miniCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $miniCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <?php if($miniCategory->getNoOfProducts() < 3): ?>
-                                                            <?php continue; ?>;
-                                                            <?php endif; ?>
-                                                            <li style="padding-left: 7px;"><a href="<?php echo e(url('shop/category/'.$miniCategory->slug)); ?>"><?php echo e(ucwords($miniCategory->name)); ?></a></li>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                                        </ul>
-                                                    </div><!-- /.col -->
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            
-                                                </div>
-                                            </div> <!-- /.yamm-content -->  
-                                        </li>
-                                    </ul>
-
-                                </li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                            </ul><!-- /.navbar-nav -->
-                            <div class="clearfix"></div>                
-                        </div><!-- /.nav-outer -->
-                    </div><!-- /.navbar-collapse -->
-
-
-                </div><!-- /.nav-bg-class -->
-            </div><!-- /.navbar-default -->
-
-            <div class="col-xs-2 col-sm-2 animate-dropdown top-cart-row hidden-md hidden-lg" style="padding: 0px;">
-                        
-                <div class="dropdown dropdown-cart">
-                    <a href="<?php echo e(url('shop/cart')); ?>" class="dropdown-toggle lnk-cart" style="margin-top: -5px;">
-                        <div class="items-cart-inner" style="margin: 0px auto;">
-                            <div class="basket" style="padding: 5px;">
-                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                            </div>
-
-                            <?php ($quantity = \Modules\Customer\Utilities\Utilities::getCustomerTotalCartItems()); ?>
-                            
-                            <?php ($cart = Session::get('cart')); ?>
-                            <?php if($cart != null): ?>
-                            <?php if(count($cart) > 0): ?>
-                            <div class="basket-item-count" style="left: 26px;top: 5px;"><span class="count"><?php echo e($quantity); ?></span></div>
-                            <?php else: ?> 
-                            <div class="basket-item-count" style="left: 26px;top: 5px;"><span class="count">0</span></div>                           
-                            <?php endif; ?>
-                            <?php else: ?> 
-                            <div class="basket-item-count" style="left: 26px;top: 5px;"><span class="count">0</span></div>                           
-                            <?php endif; ?>
-
-                        </div>
-                    </a>
-                </div>
             </div>
+        </div> <!-- /.yamm-content -->
+        </li>
+        </ul>
 
-        </div><!-- /.container-class -->
+        </li>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+        </ul><!-- /.navbar-nav -->
+        <div class="clearfix"></div>
+    </div><!-- /.nav-outer -->
+    </div><!-- /.navbar-collapse -->
+
+
+    </div><!-- /.nav-bg-class -->
+    </div><!-- /.navbar-default -->
+
+    <div class="col-xs-2 col-sm-2 animate-dropdown top-cart-row hidden-md hidden-lg" style="padding: 0px;">
+
+        <div class="dropdown dropdown-cart">
+            <a href="<?php echo e(url('shop/cart')); ?>" class="dropdown-toggle lnk-cart" style="margin-top: -5px;">
+                <div class="items-cart-inner" style="margin: 0px auto;">
+                    <div class="basket" style="padding: 5px;">
+                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                    </div>
+
+                    <?php ($quantity = \Modules\Customer\Utilities\Utilities::getCustomerTotalCartItems()); ?>
+
+                    <?php ($cart = Session::get('cart')); ?>
+                    <?php if($cart != null): ?>
+                    <?php if(count($cart) > 0): ?>
+                    <div class="basket-item-count" style="left: 26px;top: 5px;"><span class="count"><?php echo e($quantity); ?></span></div>
+                    <?php else: ?>
+                    <div class="basket-item-count" style="left: 26px;top: 5px;"><span class="count">0</span></div>
+                    <?php endif; ?>
+                    <?php else: ?>
+                    <div class="basket-item-count" style="left: 26px;top: 5px;"><span class="count">0</span></div>
+                    <?php endif; ?>
+
+                </div>
+            </a>
+        </div>
+    </div>
+
+    </div><!-- /.container-class -->
 
     </div><!-- /.header-nav -->
     <!-- ============================================== NAVBAR : END ============================================== -->
@@ -524,8 +472,7 @@ $(document).ready(function(){
 </header>
 
 <style type="text/css">
-    
-    .free-shipping{
+    .free-shipping {
 
         padding: 10px 5px;
         margin: 5px 0px;

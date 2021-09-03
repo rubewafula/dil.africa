@@ -139,14 +139,14 @@
                                     <div class="cart-item product-summary">
                                         <input type="hidden" class="product_id_class" value="<?php echo e($item->getProductPriceId()); ?>"/>
                                         <div class="row">
-                                            <div class="col-xs-2 col-sm-2">
+                                            <div class="col-xs-3 col-sm-2">
                                                 <div class="image">
                                                     <a href="<?php echo e(url('/shop/product/detail/'.$slug)); ?>">
                                                         <img src="<?php echo e(url('assets/images/products/'.$item->getProductImage())); ?>" width="50px" alt="">
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-8 col-sm-8">
+                                            <div class="col-xs-9 col-sm-8">
 
                                                 <div class="product-info text-left" style="margin-bottom: 10px;color: #ccc;padding-left: 20px;">
                                                     <?php echo e($item->getSeller()); ?>
@@ -302,12 +302,19 @@
                 </div>
 
                 <!-- ============================================== Related PRODUCTS ============================================== -->
-                <section class="section featured-product wow fadeInUp">
+                <section class="section featured-product wow fadeInUp hidden-xs hidden-sm">
                     <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
 
                         <?php echo $__env->make('customer::home.recommended.index', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </div><!-- /.scroll-tabs -->
                 </section><!-- /.section -->
+
+                 <section class="section featured-product hidden-md hidden-lg">
+                    <div id="product-tabs-slider" class="scroll-tabs outer-top-vs">
+
+                        <?php echo $__env->make('customer::home.recommended.index', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    </div><!-- /.scroll-tabs -->
+                </section>
                 <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
 
             </div><!-- /.col -->
